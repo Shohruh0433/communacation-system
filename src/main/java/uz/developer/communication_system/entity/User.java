@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Employe {
+@Table(name = "Users")
+public class User {
     @Id
     @GeneratedValue
     private UUID id;
@@ -23,6 +23,13 @@ public class Employe {
     @Column(unique = true)
     private String userName;
     private String password;
-    private String phoneNumber;
+    private String firstName;
+    private String lastName;
+    private boolean legal; //yuridik
     private boolean active;
+    private Date birthDate;
+
+    @ManyToMany
+    private Set<Role> roles;
+
 }

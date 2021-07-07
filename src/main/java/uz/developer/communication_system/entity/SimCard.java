@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class SimCard {
     @Id
     @GeneratedValue
@@ -23,7 +24,7 @@ public class SimCard {
     @ManyToOne
     private Company company;
     @ManyToOne
-    private Client client;
+    private User user;
 
     @OneToOne
     private Tariff tariff;
