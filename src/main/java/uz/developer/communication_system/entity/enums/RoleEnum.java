@@ -9,7 +9,4 @@ public enum RoleEnum {
     ROLL_FILIAL_MANAGER,
     ROLL_NUMBERS_MANAGER,
     ROLL_EMPLOYEES_MANAGER;
-
-
-
 }
