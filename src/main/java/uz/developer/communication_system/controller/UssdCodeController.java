@@ -51,13 +51,6 @@ public class UssdCodeController {
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public HttpEntity<?> delete(@PathVariable Integer id) {
 
-        ApiResponse apiResponse = ussdCodeService.delete(id);
-
-        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
-
-    }
 
 }
