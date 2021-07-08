@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class PaketTrafic {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String code;
     private String  number;
     private double netLimitAll;

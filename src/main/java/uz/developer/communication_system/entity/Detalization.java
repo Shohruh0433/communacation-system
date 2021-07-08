@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 public class Detalization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @CreationTimestamp
     private Timestamp date;
     private String type;

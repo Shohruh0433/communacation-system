@@ -5,4 +5,6 @@ import uz.developer.communication_system.entity.District;
 
 public interface DistrictRepository extends JpaRepository<District,Integer> {
 
+    boolean existsByName(String name);
+
 }

@@ -5,5 +5,5 @@ import uz.developer.communication_system.entity.Region;
 
 public interface RegionRepository extends JpaRepository<Region,Integer> {
 
-
+    boolean existsByName(String name);
 }

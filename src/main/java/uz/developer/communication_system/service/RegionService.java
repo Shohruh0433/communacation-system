@@ -21,10 +21,13 @@ public class RegionService {
     public ApiResponse add(Region region) {
 
         try {
+            if (regionRepository.existsByName(region.getName()))
+                return new ApiResponse("Already exist Region", false);
+
             regionRepository.save(region);
-            return new ApiResponse("Region added ",true);
+            return new ApiResponse("Region added ", true);
         }catch (Exception e){
-            return new ApiResponse("Already exist Region",false);
+            return new ApiResponse("did not added Region", false);
         }
 
     }

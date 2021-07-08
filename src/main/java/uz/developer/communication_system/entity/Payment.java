@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class Payment {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     private Timestamp payDate;
     private String ownerPay;

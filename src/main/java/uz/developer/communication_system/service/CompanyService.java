@@ -28,6 +28,9 @@ public class CompanyService {
     public ApiResponse add(CompanyDto companyDto) {
         try {
 
+            if (districtRepository.existsByName(companyDto.getName()))
+                return new ApiResponse("Already exist Company",false);
+
             Company company = new Company();
             if (companyDto.getCompanyId() != null){
             Optional<Company> optionalCompany = companyRepository.findById(companyDto.getCompanyId());
