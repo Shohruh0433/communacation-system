@@ -42,12 +42,12 @@ public class DistrictService {
 
     }
 
-    public ApiResponse getAll() {
+    public ApiResponse getAll(int page, int size) {
 
-        Pageable pageable = PageRequest.of(0,10);
-        Page<District> page = districtRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page,size);
+        Page<District> pages = districtRepository.findAll(pageable);
 
-        return new ApiResponse("success ",true,page);
+        return new ApiResponse("success ",true,pages);
     }
 
     public ApiResponse getById(Integer id) {

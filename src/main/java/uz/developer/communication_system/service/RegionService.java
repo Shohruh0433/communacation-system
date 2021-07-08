@@ -29,12 +29,12 @@ public class RegionService {
 
     }
 
-    public ApiResponse getAll() {
+    public ApiResponse getAll(int page, int size) {
 
-        Pageable pageable = PageRequest.of(0,10);
-        Page<Region> page = regionRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Region> pages = regionRepository.findAll(pageable);
 
-        return new ApiResponse("success ",true,page);
+        return new ApiResponse("success ",true,pages);
     }
 
     public ApiResponse getById(Integer id) {

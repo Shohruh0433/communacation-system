@@ -29,9 +29,9 @@ public class RegionController {
     }
 
     @GetMapping("/getAll")
-    public HttpEntity<?> getAll(){
+    public HttpEntity<?> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
 
-        ApiResponse apiResponse = regionService.getAll();
+        ApiResponse apiResponse = regionService.getAll(page,size);
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }

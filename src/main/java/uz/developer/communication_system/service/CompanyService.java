@@ -50,12 +50,12 @@ public class CompanyService {
 
     }
 
-    public ApiResponse getAll() {
+    public ApiResponse getAll(int page, int size) {
 
-        Pageable pageable = PageRequest.of(0,10);
-        Page<Company> page = companyRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Company> pages = companyRepository.findAll(pageable);
 
-        return new ApiResponse("success ",true,page);
+        return new ApiResponse("success ",true,pages);
 
     }
 

@@ -30,9 +30,9 @@ public class CompanyController {
     }
 
     @GetMapping("/getAll")
-    public HttpEntity<?> getAll(){
+    public HttpEntity<?> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
 
-        ApiResponse apiResponse = companyService.getAll();
+        ApiResponse apiResponse = companyService.getAll(page,size);
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }

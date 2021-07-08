@@ -27,9 +27,9 @@ public class DistrictController {
     }
 
     @GetMapping("/getAll")
-    public HttpEntity<?> getAll(){
+    public HttpEntity<?> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
 
-        ApiResponse apiResponse = districtService.getAll();
+        ApiResponse apiResponse = districtService.getAll(page,size);
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }
