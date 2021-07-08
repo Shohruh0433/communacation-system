@@ -74,14 +74,14 @@ public class CompanyService {
 
         try {
 
-            Optional<Company> optionalCompany1 = companyRepository.findById(id);
-            if (optionalCompany1.isEmpty())
+            Optional<Company> optionalCompany = companyRepository.findById(id);
+            if (optionalCompany.isEmpty())
                 return new ApiResponse("Not found Company",false);
+            Company company = optionalCompany.get();
 
-            Company company = new Company();
             if (companyDto.getCompanyId() != null){
-                Optional<Company> optionalCompany = companyRepository.findById(companyDto.getCompanyId());
-                if (optionalCompany.isEmpty())
+                Optional<Company> optionalCompanyCategory = companyRepository.findById(companyDto.getCompanyId());
+                if (optionalCompanyCategory.isEmpty())
                     return new ApiResponse("Not found  Company",false);
 
                 company.setCompany(optionalCompany.get());

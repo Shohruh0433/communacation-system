@@ -1,4 +1,4 @@
-package uz.developer.communication_system.payload.model;
+package uz.developer.communication_system.payload;
 
 import lombok.Data;
 import uz.developer.communication_system.entity.ServiceCategory;

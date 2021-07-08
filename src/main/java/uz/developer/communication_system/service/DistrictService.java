@@ -69,7 +69,7 @@ public class DistrictService {
             if (optionalRegion.isEmpty())
                 return new ApiResponse("Not found Region",false);
 
-            District district = new District();
+            District district = optionalDistrict.get();
             district.setName(districtDto.getName());
             district.setRegion(optionalRegion.get());
             districtRepository.save(district);

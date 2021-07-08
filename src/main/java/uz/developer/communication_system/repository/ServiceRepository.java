@@ -6,4 +6,6 @@ import uz.developer.communication_system.entity.Service;
 public interface ServiceRepository extends JpaRepository <Service,Integer> {
 
 
+    boolean existsByName(String name);
+
 }
