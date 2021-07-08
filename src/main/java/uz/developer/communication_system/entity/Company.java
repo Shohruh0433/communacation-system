@@ -16,9 +16,10 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false,unique = true)
     private String name;
 
-    private boolean active;
+    private boolean active =true;
 
     @ManyToOne
     private Company company;
