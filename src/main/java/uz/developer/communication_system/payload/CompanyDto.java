@@ -11,6 +11,8 @@ public class CompanyDto {
 
     private String name;
 
+    private boolean active;
+
     private Integer companyId;
 
     private Integer districtId;

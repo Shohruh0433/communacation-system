@@ -82,6 +82,7 @@ public class ServiceService {
 
             uz.developer.communication_system.entity.Service service=optionalService.get();
             service.setName(serviceDto.getName());
+            service.setActive(serviceDto.isActive());
             service.setServiceCode(serviceDto.getServiceCode());
             service.setDescription(serviceDto.getDescription());
             service.setPriceOfDay(serviceDto.getPriceOfDay());

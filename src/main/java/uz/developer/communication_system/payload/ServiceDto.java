@@ -14,4 +14,5 @@ public class ServiceDto {
     private String serviceCode;
     private double priceOfMonth;
     private double priceOfDay;
+    private boolean active;
 }

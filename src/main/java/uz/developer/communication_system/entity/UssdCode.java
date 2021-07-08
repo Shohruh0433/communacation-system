@@ -15,8 +15,11 @@ public class UssdCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String code;
+
     private String description;
-    @ManyToMany
-    private List<Company> companies;
+
+    @ManyToOne
+    private Company company;
 }

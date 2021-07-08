@@ -91,6 +91,7 @@ public class CompanyService {
                 return new ApiResponse("Not found  District",false);
 
             company.setName(companyDto.getName());
+            company.setActive(companyDto.isActive());
             company.setDistrict(optionalDistrict.get());
             companyRepository.save(company);
             return new ApiResponse("Company added ",true);
