@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Entity
 public class ServiceCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

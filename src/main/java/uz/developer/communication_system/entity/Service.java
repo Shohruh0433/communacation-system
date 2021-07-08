@@ -14,15 +14,16 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
+
     @ManyToOne
     private ServiceCategory serviceCategory;
+
     private String description;
     private String serviceCode;
     private double priceOfMonth;
     private double priceOfDay;
-    private boolean active;
-
-
+    private boolean active = true;
 }
 
