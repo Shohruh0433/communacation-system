@@ -18,7 +18,7 @@ public class User {
     @Id
     @GeneratedValue
     private UUID id;
-    private String passportSeria;
+    private String passportSeriya;
     private String passportNumber;
     @Column(unique = true)
     private String userName;
