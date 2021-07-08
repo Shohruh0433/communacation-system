@@ -30,6 +30,12 @@ public class PacketService {
         return packets.getContent();
     }
 
+    public List<Packet> getCompanyPacket(Integer id, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Packet> allByCompanyId = packetRepository.findAllByCompanyId(id, pageable);
+        return allByCompanyId.getContent();
+    }
+
 
     public Packet getPacket(Integer id){
         Optional<Packet> optionalPacket

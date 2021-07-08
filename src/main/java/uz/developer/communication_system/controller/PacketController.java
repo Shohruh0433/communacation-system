@@ -37,6 +37,18 @@ public class PacketController {
     }
 
     /**
+     * GET COMPANY ALL PACKETS
+     * @param companyId
+     * @param page
+     * @param size
+     * @return List<Packet>
+     */
+    public ResponseEntity<List<Packet>> getCompanyPackets(@PathVariable Integer companyId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        List<Packet> companyPacket = packetService.getCompanyPacket(companyId, page, size);
+        return ResponseEntity.ok(companyPacket);
+    }
+
+    /**
      * GET ONE PACKET
      * @param id
      * @return Packet

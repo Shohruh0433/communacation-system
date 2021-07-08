@@ -16,6 +16,7 @@ public class PaketTrafic {
     @Id
     @GeneratedValue
     private Long id;
+    private String code;
     private String  number;
     private double netLimitAll;
     private double netLimitTelegram;
