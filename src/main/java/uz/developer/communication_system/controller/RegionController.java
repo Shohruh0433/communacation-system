@@ -12,7 +12,7 @@ import uz.developer.communication_system.service.RegionService;
 import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
-@RequestMapping("/region")
+@RequestMapping("/api/region")
 public class RegionController {
 
     @Autowired

@@ -12,7 +12,7 @@ import uz.developer.communication_system.payload.CompanyDto;
 import uz.developer.communication_system.service.CompanyService;
 
 @RestController
-@RequestMapping ("company")
+@RequestMapping ("/api/company")
 
 public class CompanyController {
 
