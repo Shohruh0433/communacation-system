@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -18,7 +17,8 @@ public class SimCard {
     @GeneratedValue
     private Long id;
     private boolean block;
-    private String number;
+    private String code;
+       private String number;
     private double balance;
     private boolean active;
     @ManyToOne
