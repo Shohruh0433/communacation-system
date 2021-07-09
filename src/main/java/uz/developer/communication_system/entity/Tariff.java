@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -20,36 +18,29 @@ public class Tariff {
 
     private String name;
 
-    private boolean legan;
+    private boolean legal ; // legal => true , physical => false ,default physical
 
     @ManyToOne
     private Company company;
 
     private double transitionPrice;
 
-    private boolean active;
-
+    private boolean active = true;
     private double priceOfMonth;
     private double priceOfDay;
-
     private double netLimitAll;
-
     private double netLimitForTelegram;
-
     private double netLimitForYoutube;
-
     private double netLimitForInstagram;
-
     private int sms;
+    private Integer minuteInNet;
+    private Integer minuteOutNet;
 
-    private Integer minutInNet;
-    private Integer minutOutNet;
     private Integer expireDay;
 
-    private double priceofMinInNet;
+    private double priceOfMinInNet;
+    private double priceOfMinOutNet;
+    private double priceOfNetAll;
 
-    private double priceofMinOutNet;
-
-    private double priceofNetAll;
 
 }
