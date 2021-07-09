@@ -85,4 +85,12 @@ public class UssdCodeService {
         }
     }
 
+    public ApiResponse getByCompany(int page, int size, Integer companyId) {
+
+        Pageable pageable = PageRequest.of(page,size);
+        Page<UssdCode> pages = ussdCodeRepository.findAllByCompanyId(companyId,pageable);
+
+        return new ApiResponse("success ",true,pages);
+
+    }
 }

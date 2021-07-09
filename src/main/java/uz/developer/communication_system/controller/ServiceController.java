@@ -49,4 +49,24 @@ public class ServiceController {
     }
 
 
+    @GetMapping("/get/{companyId}")
+    public HttpEntity<?> getByCompany( @PathVariable Integer companyId,
+                                 @RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "10") int size){
+
+        ApiResponse apiResponse = serviceService.getByCompany(companyId,page,size);
+
+        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
+    }
+
+    @GetMapping("/get/{serviceCategoryId}")
+    public HttpEntity<?> getByServiceCategory( @PathVariable Integer serviceCategoryId,
+                                       @RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "10") int size){
+
+        ApiResponse apiResponse = serviceService.getByServiceCategory(serviceCategoryId,page,size);
+
+        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
+    }
+
 }

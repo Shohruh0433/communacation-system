@@ -54,6 +54,36 @@ public class CompanyController {
 
     }
 
+    @GetMapping("/get/{districtId}")
+    public HttpEntity<?> getByDistrict( @PathVariable Integer districtId ,
+                     @RequestParam(defaultValue = "0") int page,
+                     @RequestParam(defaultValue = "10") int size){
 
+        ApiResponse apiResponse = companyService.getByDistrict(districtId,page,size);
+
+        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
+    }
+
+
+    @GetMapping("/get/{regionId}")
+    public HttpEntity<?> getByRegionId( @PathVariable Integer regionId ,
+                                        @RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size){
+
+        ApiResponse apiResponse = companyService.getByRegionId(regionId,page,size);
+
+        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
+    }
+
+
+    @GetMapping("/get/{companyId}")
+    public HttpEntity<?> getByParentCompany( @PathVariable Integer companyId ,
+                                        @RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size){
+
+        ApiResponse apiResponse = companyService.getByParentCompany(companyId,page,size);
+
+        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
+    }
 
 }

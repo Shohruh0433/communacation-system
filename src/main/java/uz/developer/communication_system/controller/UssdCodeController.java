@@ -34,6 +34,17 @@ public class UssdCodeController {
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }
 
+
+    @GetMapping("/getAll/{companyId}")
+    public HttpEntity<?> getByCompany(@PathVariable Integer companyId,
+                                       @RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "10") int size){
+
+        ApiResponse apiResponse = ussdCodeService.getByCompany(page,size,companyId);
+
+        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
+    }
+
     @GetMapping("/getById/{id}")
     public HttpEntity<?> getById(@PathVariable Integer id ){
 

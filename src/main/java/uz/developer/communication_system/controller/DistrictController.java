@@ -11,7 +11,7 @@ import uz.developer.communication_system.payload.DistrictDto;
 import uz.developer.communication_system.service.DistrictService;
 
 @RestController
-@RequestMapping("/district")
+@RequestMapping("/api/district")
 public class DistrictController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class DistrictController {
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }
 
-    @GetMapping("/api/getAll")
+    @GetMapping("/getAll")
     public HttpEntity<?> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
 
         ApiResponse apiResponse = districtService.getAll(page,size);
@@ -58,6 +58,16 @@ public class DistrictController {
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
 
+    }
+
+    @GetMapping("/get/{regionId}")
+    public HttpEntity<?> getByRegion(@PathVariable Integer regionId,
+                               @RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "10") int size){
+
+        ApiResponse apiResponse = districtService.getByRegion(regionId,page,size);
+
+        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }
 
 }

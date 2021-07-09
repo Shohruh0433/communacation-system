@@ -88,4 +88,13 @@ public class DistrictService {
             return new ApiResponse("Not found District ",false);
         }
     }
+
+    public ApiResponse getByRegion(Integer regionId, int page, int size) {
+
+        Pageable pageable = PageRequest.of(page,size);
+        Page<District> pages = districtRepository.findAllByRegion_Id(regionId,pageable);
+
+        return new ApiResponse("success ",true,pages);
+
+    }
 }

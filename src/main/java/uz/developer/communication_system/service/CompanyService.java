@@ -102,4 +102,29 @@ public class CompanyService {
     }
 
 
+    public ApiResponse getByDistrict(Integer districtId, int page, int size) {
+
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Company> pages = companyRepository.findAllByDistrict_Id(districtId,pageable);
+
+        return new ApiResponse("success ",true,pages);
+
+    }
+
+    public ApiResponse getByParentCompany(Integer companyId, int page, int size) {
+
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Company> pages = companyRepository.findAllByCompanyId(companyId,pageable);
+
+        return new ApiResponse("success ",true,pages);
+
+    }
+
+    public ApiResponse getByRegionId(Integer regionId, int page, int size) {
+
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Company> pages = companyRepository.findAllByDistrict_Region_Id(regionId,pageable);
+
+        return new ApiResponse("success ",true,pages);
+    }
 }
