@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Entity
 public class TariffTrafic {
+
+
     @Id
     @GeneratedValue
     private Long id;
@@ -25,7 +27,7 @@ public class TariffTrafic {
     private int sms;
     private double minutOutNet;
     private double minutInNet;
-
     private int traficExpireDate;
+
 
 }

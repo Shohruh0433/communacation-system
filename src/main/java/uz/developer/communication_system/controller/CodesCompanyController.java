@@ -52,5 +52,18 @@ public class CodesCompanyController {
 
 
     }
+    @DeleteMapping("/{id}")
+    public ApiResponse delete(@PathVariable int id){
+        boolean b = codesCompanyRepository.existsById(id);
+        if (!b) return new ApiResponse("this code not found",false);
+        codesCompanyRepository.deleteById(id);
+        return new ApiResponse("successfully deleted",true);
+    }
+
+    @GetMapping("/getByCompanyId/{id}")
+    public ApiResponse getAllByCompanyId(@PathVariable int id){
+        return new ApiResponse("result",true,codesCompanyRepository.findAllByCompanyId(id));
+    }
+
 
 }

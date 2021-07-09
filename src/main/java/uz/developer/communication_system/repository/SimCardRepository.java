@@ -1,5 +1,8 @@
 package uz.developer.communication_system.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import uz.developer.communication_system.entity.SimCard;
 
@@ -13,5 +16,10 @@ public interface SimCardRepository extends JpaRepository<SimCard ,Long> {
 
       Optional< SimCard> findByCodeAndNumberAndUserNull(String code, String number);
 
+      SimCard findByCodeAndNumber(String code, String number);
 
+
+    List<SimCard> findAllByUserIsNullAndCompany_Id(Integer company_id);
+
+    List<SimCard> findAllByUser_PassportSeriyaAndUser_PassportNumber(String user_passportSeriya, String user_passportNumber);
 }
