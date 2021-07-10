@@ -6,8 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.developer.communication_system.entity.Company;
-import uz.developer.communication_system.entity.District;
-import uz.developer.communication_system.entity.Region;
 import uz.developer.communication_system.entity.Tariff;
 import uz.developer.communication_system.payload.ApiResponse;
 import uz.developer.communication_system.payload.TariffDto;
@@ -142,36 +140,38 @@ public class TariffService {
 
     }
 
-    public ApiResponse getByActive(int page, int size) {
+    public ApiResponse getByActiveForCompany(Integer companyId ,int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByActiveIsTrue(pageable);
+        Page<Tariff> pages = tariffRepository.findAllByActiveIsTrueAndCompany_Id(companyId,pageable);
 
         return new ApiResponse("success ",true,pages);
     }
 
-    public ApiResponse getByDeleted(int page, int size) {
+    public ApiResponse getByDeletedForCompany(Integer companyId ,int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByActiveIsFalse(pageable);
+        Page<Tariff> pages = tariffRepository.findAllByActiveIsFalseAndCompanyId(companyId,pageable);
 
         return new ApiResponse("success ",true,pages);
 
     }
 
-    public ApiResponse getByForLegal(int page, int size) {
+    public ApiResponse getByLegalForCompany(Integer companyId ,int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByLegalIsTrue(pageable);
+        Page<Tariff> pages = tariffRepository.findAllByLegalIsTrueAndCompanyId(companyId,pageable);
 
         return new ApiResponse("success ",true,pages);
     }
 
-    public ApiResponse getByForPhysical(int page, int size) {
+    public ApiResponse getByPhysicalForCompany(Integer companyId ,int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByLegalIsFalse(pageable);
+        Page<Tariff> pages = tariffRepository.findAllByLegalIsFalseAndCompanyId(companyId,pageable);
 
         return new ApiResponse("success ",true,pages);
     }
+
+
 }
