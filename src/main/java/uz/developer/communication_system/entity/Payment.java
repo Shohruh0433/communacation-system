@@ -3,6 +3,7 @@ package uz.developer.communication_system.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +17,10 @@ import java.sql.Timestamp;
 public class Payment {
     @Id
     @GeneratedValue
-    private Integer id;
-
+    private Long id;
+    private String code;
+    private String number;
+    @CreationTimestamp
     private Timestamp payDate;
     private String ownerPay;
     private String typePay;
