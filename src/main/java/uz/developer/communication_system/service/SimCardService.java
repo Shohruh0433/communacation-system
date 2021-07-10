@@ -117,7 +117,7 @@ public class SimCardService {
         simCard1.setTariff(null);
         simCard1.setBalance(0);
         simCard1.setBlock(true);
-        simCard1.setPaketTrafic(null);
+        simCard1.setPaketTraffic(null);
         simCard1.setUser(null);
         simCardRepository.save(simCard1);
         return new ApiResponse("Successfully saved", true);

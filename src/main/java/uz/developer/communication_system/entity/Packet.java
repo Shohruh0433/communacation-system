@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -34,7 +35,7 @@ public class Packet {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @NotNull
     @ManyToOne
     private Company company;
 }

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class PaketTrafic {
+public class PaketTraffic {
     @Id
     @GeneratedValue
     private Integer id;
