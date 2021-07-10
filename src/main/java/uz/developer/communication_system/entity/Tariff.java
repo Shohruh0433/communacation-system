@@ -41,6 +41,7 @@ public class Tariff {
     private double priceOfMinInNet;
     private double priceOfMinOutNet;
     private double priceOfNetAll;
+    private double priceOfSms;
 
 
 }

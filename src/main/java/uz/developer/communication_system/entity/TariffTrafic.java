@@ -25,9 +25,9 @@ public class TariffTrafic {
     private double netLimitTelegram;
     private double netLimitYoutube;
     private int sms;
-    private double minutOutNet;
-    private double minutInNet;
-    private int traficExpireDate;
+    private double minuteOutNet;
+    private double minuteInNet;
+    private int trafficExpireDate;
 
 
 }

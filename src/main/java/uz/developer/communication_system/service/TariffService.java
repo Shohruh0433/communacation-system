@@ -50,6 +50,7 @@ public class TariffService {
          tariff.setPriceOfMonth(tariffDto.getPriceOfMonth());
          tariff.setPriceOfNetAll(tariffDto.getPriceOfNetAll());
          tariff.setSms(tariffDto.getSms());
+         tariff.setPriceOfSms(tariffDto.getPriceOfSms());
          tariff.setTransitionPrice(tariffDto.getTransitionPrice());
 
             return new ApiResponse("Tariff added ",true);
@@ -129,7 +130,6 @@ public class TariffService {
         return new ApiResponse("Tariff deleted",true);
 
     }
-
 
     public ApiResponse getByCompany(Integer companyId, int page, int size) {
 
