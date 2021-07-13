@@ -18,12 +18,16 @@ import java.sql.Timestamp;
 public class Detalization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @CreationTimestamp
     private Timestamp date;
-    private String type;
+    private String type;    //jaraoyon nomi
     private double price;
-    private String phoneNumber;
+    private String myCode;
+    private String myNumber;
+    private int length;
+    private String outCode;
+    private String outNumber;
     private boolean input;     //kiruvchi
     private  boolean output;   //chiquvchi
 
