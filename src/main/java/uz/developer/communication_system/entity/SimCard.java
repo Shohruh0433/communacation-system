@@ -30,6 +30,6 @@ public class SimCard {
     private Tariff tariff;
 
     @ManyToOne
-    private PaketTrafic  paketTrafic;
+    private PaketTraffic paketTraffic;
 
 }

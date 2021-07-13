@@ -12,18 +12,19 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class PaketTrafic {
+public class PaketTraffic {
     @Id
     @GeneratedValue
     private Integer id;
+
     private String code;
     private String  number;
     private double netLimitAll;
     private double netLimitTelegram;
     private double netLimitYoutube;
     private int sms;
-    private double minutOutNet;
-    private double minutInNet;
+    private double minuteOutNet;
+    private double minuteInNet;
 
-    private int traficExpireDate;
+    private int trafficExpireDate;
 }
