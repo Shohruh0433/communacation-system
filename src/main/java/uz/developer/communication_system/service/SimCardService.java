@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SimCardService {
+public  class SimCardService {
 
     @Autowired
     SimCardRepository simCardRepository;
@@ -38,7 +38,7 @@ public class SimCardService {
 
 
     //nomer orqali bo'sh bo'lgan sim kartani qidirish
-    public ApiResponse getSearchSimCard(SimCardForSearchDto simCardForSearchDto) {
+    public  ApiResponse getSearchSimCard(SimCardForSearchDto simCardForSearchDto) {
         List<SimCard> allByCodeOrNumberContainsAndUserNull = simCardRepository.findAllByCodeOrNumberContainsAndUserNull(simCardForSearchDto.getCode(), simCardForSearchDto.getNomer());
         return new ApiResponse("natija: ", true, allByCodeOrNumberContainsAndUserNull);
     }
@@ -53,7 +53,7 @@ public class SimCardService {
         if (passport == null)
             return new ApiResponse("passport not found", false);
         Optional<CodesCompany> codesCompany = codesCompanyRepository.findByCode(simCardForOrderDto.getCode());
-        if (!codesCompany.isPresent())
+        if (codesCompany.isEmpty())
             return new ApiResponse("this code company not found", false);
         Optional<Tariff> optionalTariff = tariffRepository.findById(simCardForOrderDto.getTariff_id());
         if (optionalTariff.isEmpty())

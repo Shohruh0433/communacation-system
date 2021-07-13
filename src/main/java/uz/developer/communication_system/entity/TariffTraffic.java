@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 
 @Data
@@ -20,6 +21,7 @@ public class TariffTraffic {
     @Id
     @GeneratedValue
     private Long id;
+
     private String  number;
     private double netLimitAll;
     private double netLimitTelegram;
@@ -28,6 +30,5 @@ public class TariffTraffic {
     private double minuteOutNet;
     private double minuteInNet;
     private int trafficExpireDate;
-
 
 }
