@@ -4,25 +4,34 @@ package uz.developer.communication_system.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 
-public class SimCard {
+public class SimCard implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
     private boolean block;
     private String code;
-       private String number;
+    private String number;
     private double balance;
     private boolean active;
+
     @ManyToOne
     private Company company;
+
     @ManyToOne
     private User user;
 
@@ -31,5 +40,67 @@ public class SimCard {
 
     @ManyToOne
     private PaketTraffic paketTraffic;
+
+    @Column(nullable = false)
+    private String password;
+
+    @ManyToMany
+    private Set<Role> roles;
+
+    @Column(nullable = false,updatable = false)
+    @CreationTimestamp
+    private Timestamp createdAt;
+
+    @UpdateTimestamp
+    private Timestamp updatedAt;
+
+    private String pinCode;
+
+
+
+    private boolean accountNonExpired = true;
+
+    private boolean accountNonLocked = true;
+
+    private boolean credentialsNonExpired = true;
+
+    private boolean enabled = true;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return code+number;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
 
 }

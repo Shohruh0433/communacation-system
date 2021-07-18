@@ -22,4 +22,10 @@ public interface SimCardRepository extends JpaRepository<SimCard ,Long> {
     List<SimCard> findAllByUserIsNullAndCompany_Id(Integer company_id);
 
     List<SimCard> findAllByUser_PassportSeriyaAndUser_PassportNumber(String user_passportSeriya, String user_passportNumber);
+
+
+
+    boolean existsByCodeAndNumber(String code, String number);
+
+
 }

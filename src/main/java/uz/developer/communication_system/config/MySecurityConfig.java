@@ -63,20 +63,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public JavaMailSender javaMailSender(){
-        JavaMailSenderImpl javaMailSender=new JavaMailSenderImpl();
-        javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setPort(587);
-        javaMailSender.setUsername("Askarov3Shohruh@gmail.com");
-        javaMailSender.setPassword("Shohruh+1998");
-        Properties properties=javaMailSender.getJavaMailProperties();
-        properties.put("mail.transport.protocol","smtp");
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.debug","true");
-        return javaMailSender;
-    }
 
     //bu mening parol va loginlarimni solishtirish uchun
     @Bean

@@ -13,23 +13,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
     private String passportSeriya;
     private String passportNumber;
-    @Column(unique = true)
-    private String userName;
-    private String password;
     private String firstName;
     private String lastName;
-    private boolean legal; //yuridikk
-    private boolean active;
+    private boolean legal; //yuridik
     private Date birthDate;
 
-    @ManyToMany
-    private Set<Role> roles;
 
 }

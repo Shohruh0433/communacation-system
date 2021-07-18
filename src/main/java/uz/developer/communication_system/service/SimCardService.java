@@ -52,6 +52,7 @@ public  class SimCardService {
         Passport passport = getPassportBySeriaAndNumber(simCardForOrderDto.getPassportSeria(), simCardForOrderDto.getPassportNumber());
         if (passport == null)
             return new ApiResponse("passport not found", false);
+        
         Optional<CodesCompany> codesCompany = codesCompanyRepository.findByCode(simCardForOrderDto.getCode());
         if (codesCompany.isEmpty())
             return new ApiResponse("this code company not found", false);
@@ -101,7 +102,7 @@ public  class SimCardService {
 
     //yangi nomerlarni bazaga kiritiish ya'ni egasi yoq nomerlarni
     public ApiResponse add(SimCardDto simCardDto) {
-        SimCard simCard = simCardRepository.findByCodeAndNumber(simCardDto.getCode(), simCardDto.getNomer());
+        SimCard simCard = simCardRepository.findByCodeAndNumber(simCardDto.getCode(), simCardDto.getNumber());
         if (simCard != null)
             return new ApiResponse("Sorry! This number saved", false);
 
@@ -113,7 +114,7 @@ public  class SimCardService {
         simCard1.setActive(false);
         simCard1.setCompany(byCode.get().getCompany());
         simCard1.setCode(simCardDto.getCode());
-        simCard1.setNumber(simCardDto.getNomer());
+        simCard1.setNumber(simCardDto.getNumber());
         simCard1.setTariff(null);
         simCard1.setBalance(0);
         simCard1.setBlock(true);
@@ -134,9 +135,8 @@ public  class SimCardService {
         String url = "http://localhost:8081/api/passport/getPassportBySeriaAndNumber?seria=" + seria + "&number=" + number;
 
         ResponseEntity<Passport> exchange = restTemplate.exchange
-                (url, HttpMethod.GET, entity,
-                        Passport.class);
-        return exchange.getBody();
+                (url, HttpMethod.GET, entity, Passport.class);
+             return exchange.getBody();
 
     }
 

@@ -16,7 +16,6 @@ public class TariffTrafficController {
     @Autowired
     TariffTrafficService tariffTrafficService;
 
-
     @PostMapping("/add")
     public HttpEntity<?> add(@RequestBody TariffTraffic tariffTraffic) {
 

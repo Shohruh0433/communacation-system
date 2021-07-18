@@ -2,13 +2,12 @@ package uz.developer.communication_system.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import uz.developer.communication_system.payload.ApiResponse;
-import uz.developer.communication_system.payload.LoginDto;
-import uz.developer.communication_system.payload.RegisterDto;
+import uz.developer.communication_system.payload.EmployeeDto;
+import uz.developer.communication_system.payload.SimCardDto;
 import uz.developer.communication_system.service.AuthService;
 
 import javax.validation.Valid;
@@ -24,25 +23,24 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterDto registerDto){
+    @PostMapping("/registerSimCard")
+    public ResponseEntity<?> registerSimCard(@Valid @RequestBody SimCardDto simCardDto){
 
-        ApiResponse register = authService.register(registerDto);
+        ApiResponse register = authService.registerSimCard(simCardDto);
         return ResponseEntity.status(register.isSuccess()?201:409).body(register);
     }
 
-    @GetMapping("/verifyEmail")
-    public HttpEntity<?> verify(@RequestParam String emailCode,@RequestParam String email){
-        ApiResponse apiResponse = authService.verifyEmail(emailCode, email);
-        return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
 
+    @PostMapping("/loginSimCard")
+    public ResponseEntity<?> loginSimCard(@Valid @RequestBody SimCardDto simCardDto){
+        return ResponseEntity.ok(authService.loginSimCard(simCardDto));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginDto loginDto){
-        return ResponseEntity.ok(authService.login(loginDto));
-    }
 
+    @PostMapping("/loginEmployee")
+    public ResponseEntity<?> loginEmployee(@Valid @RequestBody EmployeeDto employeeDto){
+        return ResponseEntity.ok(authService.loginEmployee(employeeDto));
+    }
 
 
 

@@ -25,7 +25,6 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS512,key)
                 .compact();
 
-
     }
 
     public String getUsernameFromToken(String token){

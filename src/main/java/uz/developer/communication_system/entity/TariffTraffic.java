@@ -19,7 +19,7 @@ public class TariffTraffic {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue 
     private Long id;
 
     private String  number;
