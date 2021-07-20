@@ -16,16 +16,19 @@ public interface SimCardRepository extends JpaRepository<SimCard ,Long> {
 
       Optional< SimCard> findByCodeAndNumberAndUserNull(String code, String number);
 
-      SimCard findByCodeAndNumber(String code, String number);
-
 
     List<SimCard> findAllByUserIsNullAndCompany_Id(Integer company_id);
 
     List<SimCard> findAllByUser_PassportSeriyaAndUser_PassportNumber(String user_passportSeriya, String user_passportNumber);
 
 
-
     boolean existsByCodeAndNumber(String code, String number);
+
+
+    Optional<SimCard> findBySimCardNumber(String simCardNumber);
+
+
+ Optional < SimCard> findByCodeAndNumber(String code, String number);
 
 
 }

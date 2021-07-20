@@ -28,33 +28,27 @@ public class SimCard implements UserDetails {
     private String number;
     private double balance;
     private boolean active;
-
-    @ManyToOne
-    private Company company;
-
-    @ManyToOne
-    private User user;
-
-    @OneToOne
-    private Tariff tariff;
-
-    @ManyToOne
-    private PaketTraffic paketTraffic;
-
     @Column(nullable = false)
     private String password;
-
+    private String pinCode;
+    @Column(unique = true)
+    private String simCardNumber;
+    @ManyToOne
+    private Company company;
+    @ManyToOne
+    private User user;
+    @OneToOne
+    private Tariff tariff;
+    @ManyToOne
+    private PaketTraffic paketTraffic;
     @ManyToMany
     private Set<Role> roles;
-
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
-
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    private String pinCode;
 
 
 
@@ -74,7 +68,7 @@ public class SimCard implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return pinCode;
     }
 
     @Override

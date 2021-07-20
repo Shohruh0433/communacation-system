@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Component
 public class JwtProvider {
-    private final String key="Assalom aleykum bo'lajak dasturchilar";
+    private final String key="secretKet";
 
     public String generateToken(String username, Set<Role> roles){
 

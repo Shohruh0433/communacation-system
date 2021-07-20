@@ -6,7 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import uz.developer.communication_system.payload.ApiResponse;
-import uz.developer.communication_system.payload.EmployeeDto;
+import uz.developer.communication_system.payload.EmployeeLoginDto;
+import uz.developer.communication_system.payload.EmployeeRegisterDto;
 import uz.developer.communication_system.payload.SimCardDto;
 import uz.developer.communication_system.service.AuthService;
 
@@ -23,12 +24,12 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/registerSimCard")
-    public ResponseEntity<?> registerSimCard(@Valid @RequestBody SimCardDto simCardDto){
-
-        ApiResponse register = authService.registerSimCard(simCardDto);
-        return ResponseEntity.status(register.isSuccess()?201:409).body(register);
-    }
+//    @PostMapping("/registerSimCard")
+//    public ResponseEntity<?> registerSimCard(@Valid @RequestBody SimCardDto simCardDto){
+//
+//        ApiResponse register = authService.registerSimCard(simCardDto);
+//        return ResponseEntity.status(register.isSuccess()?201:409).body(register);
+//    }
 
 
     @PostMapping("/loginSimCard")
@@ -38,10 +39,16 @@ public class AuthController {
 
 
     @PostMapping("/loginEmployee")
-    public ResponseEntity<?> loginEmployee(@Valid @RequestBody EmployeeDto employeeDto){
+    public ResponseEntity<?> loginEmployee(@Valid @RequestBody EmployeeLoginDto employeeDto){
         return ResponseEntity.ok(authService.loginEmployee(employeeDto));
     }
 
+        @PostMapping("/registerEmployee")
+    public ResponseEntity<?> registerEmployee(@Valid @RequestBody EmployeeRegisterDto employeeRegisterDto){
+
+        ApiResponse apiResponse = authService.registerEmployee(employeeRegisterDto);
+        return ResponseEntity.status(apiResponse.isSuccess()?201:409).body(apiResponse);
+    }
 
 
 }

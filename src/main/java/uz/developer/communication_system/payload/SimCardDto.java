@@ -24,11 +24,15 @@ public class SimCardDto {
 
     private List<Integer> roles;
 
-    private String password;
+    private String simCardNumber;
 
-    public String getFullNumber() {
-        return code+number;
-    }
+    private String pinCode;
+
+//    private String password;
+
+//    public String getUsername() {
+//        return code+number;
+//    }
 
 
 }

@@ -9,8 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -39,6 +41,12 @@ public class Employee implements UserDetails {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
+    @OneToOne
+    private User user;
+
+    @Column(unique = true)
+    @Email
+    private  String email;
 
     private boolean accountNonExpired =true;
 
@@ -46,7 +54,7 @@ public class Employee implements UserDetails {
 
     private boolean credentialsNonExpired =true;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
 
     @Override
