@@ -68,7 +68,7 @@ public  class SimCardService {
 
         SimCard simCard = new SimCard();
         simCard.setActive(true);
-        simCard.setCode(simCardForOrderDto.getCode());
+        simCard.setCompanyCode(simCardForOrderDto.getCode());
         simCard.setUser(user);
         simCard.setCompany(codesCompany.get().getCompany());
         simCard.setNumber(simCardForOrderDto.getNomer());
@@ -117,7 +117,7 @@ public  class SimCardService {
             SimCard simCard = new SimCard();
             simCard.setActive(false);
             simCard.setCompany(byCode.get().getCompany());
-            simCard.setCode(simCardDto.getCode());
+            simCard.setCompanyCode(simCardDto.getCode());
             simCard.setNumber(simCardDto.getNumber());
             simCard.setTariff(null);
             simCard.setBalance(0);

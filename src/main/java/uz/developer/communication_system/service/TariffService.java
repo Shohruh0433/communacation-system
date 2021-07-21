@@ -34,8 +34,9 @@ public class TariffService {
                 return new ApiResponse("Already exist this name",false);
 
             Tariff tariff = new Tariff();
+
+     tariff.setCompany(optionalCompany.get());
          tariff.setExpireDay(tariffDto.getExpireDay());
-         tariff.setCompany(optionalCompany.get());
          tariff.setLegal(tariffDto.isLegal());
          tariff.setName(tariffDto.getName());
          tariff.setMinuteInNet(tariffDto.getMinuteInNet());

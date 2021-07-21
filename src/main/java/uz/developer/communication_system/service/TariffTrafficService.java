@@ -21,48 +21,56 @@ public class TariffTrafficService {
     TariffTrafficRepository tariffTrafficRepository;
 
 
-    public ApiResponse add(TariffTraffic tariffTraffic) {
+//    public ApiResponse add(TariffTraffic tariffTraffic) {
+//
+//        try {
+//            tariffTrafficRepository.save(tariffTraffic);
+//            return new ApiResponse("TariffTraffic added ", true);
+//        }catch (Exception e){
+//            return new ApiResponse("did not added TariffTraffic", false);
+//        }
+//
+//    }
 
-        try {
-            tariffTrafficRepository.save(tariffTraffic);
-            return new ApiResponse("TariffTraffic added ", true);
-        }catch (Exception e){
-            return new ApiResponse("did not added TariffTraffic", false);
-        }
-
-    }
-
-    public ApiResponse getAll(int page, int size) {
-
-        Pageable pageable = PageRequest.of(page,size);
-        Page<TariffTraffic> pages = tariffTrafficRepository.findAll(pageable);
-
-        return new ApiResponse("success ",true,pages);
-    }
+//    public ApiResponse getAll(int page, int size) {
+//
+//        Pageable pageable = PageRequest.of(page,size);
+//        Page<TariffTraffic> pages = tariffTrafficRepository.findAll(pageable);
+//
+//        return new ApiResponse("success ",true,pages);
+//    }
 
 
     public ApiResponse getById(Long id) {
 
         Optional<TariffTraffic> optionalTariffTraffic = tariffTrafficRepository.findById(id);
         return optionalTariffTraffic.map(
-                region -> new ApiResponse("success ", true, region)).orElseGet(()
-                -> new ApiResponse("not found TariffTraffic", false));
+                tariffTraffic -> new ApiResponse("success ", true, tariffTraffic)).orElseGet(()
+                -> new ApiResponse("not found ", false));
     }
 
-    public ApiResponse edit(TariffTraffic tariffTraffic, Long id) {
+    public ApiResponse getByCodeAndNumber(String companyCode,String number) {
 
-        try {
-            Optional<TariffTraffic> optionalTariffTraffic = tariffTrafficRepository.findById(id);
-            if (optionalTariffTraffic.isEmpty())
-                return new ApiResponse("TariffTraffic not found ", false);
-
-            tariffTrafficRepository.save(tariffTraffic);
-            return new ApiResponse("TariffTraffic edited ", true);
-        }catch (Exception e){
-            return new ApiResponse("did not edited TariffTraffic", false);
-        }
-
+        Optional<TariffTraffic> optionalTariffTraffic = tariffTrafficRepository.findByCompanyCodeAndNumber(companyCode,number);
+        return optionalTariffTraffic.map(
+                tariffTraffic -> new ApiResponse("success ", true, tariffTraffic)).orElseGet(()
+                -> new ApiResponse("not found", false));
     }
+
+//    public ApiResponse edit(TariffTraffic tariffTraffic, Long id) {
+//
+//        try {
+//            Optional<TariffTraffic> optionalTariffTraffic = tariffTrafficRepository.findById(id);
+//            if (optionalTariffTraffic.isEmpty())
+//                return new ApiResponse("TariffTraffic not found ", false);
+//
+//            tariffTrafficRepository.save(tariffTraffic);
+//            return new ApiResponse("TariffTraffic edited ", true);
+//        }catch (Exception e){
+//            return new ApiResponse("did not edited TariffTraffic", false);
+//        }
+//
+//    }
 
 
 }

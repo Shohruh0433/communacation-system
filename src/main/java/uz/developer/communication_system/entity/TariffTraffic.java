@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.sql.Timestamp;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -23,12 +24,13 @@ public class TariffTraffic {
     private Long id;
 
     private String  number;
+    private String  companyCode;
     private double netLimitAll;
     private double netLimitTelegram;
     private double netLimitYoutube;
-    private int sms;
-    private double minuteOutNet;
-    private double minuteInNet;
-    private int trafficExpireDate;
+    private long sms;
+    private long minuteOutNet;
+    private long minuteInNet;
+    private Date trafficExpireDate;
 
 }

@@ -22,7 +22,7 @@ public class TariffDto {
     private double transitionPrice;
 
     @NotNull
-    private Integer expireDay;
+    private Long expireDay;
 
     private boolean active = true;
     private double priceOfMonth;

@@ -3,6 +3,7 @@ package uz.developer.communication_system.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uz.developer.communication_system.entity.enums.PacketEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,24 +19,23 @@ public class Packet {
     private Integer id;
 
     @Column(nullable = false)
-    private String type;
-
+    private PacketEnum packetType;
     @Column(nullable = false)
-    private double amount;
-
+    private int amount;
     @Column(nullable = false)
     private double price;
+    @Column(nullable = false)
+    private String packetCode;
+    @Column(nullable = false)
+    private String description;
+    @NotNull
+    @ManyToOne
+    private Company company;
 
     @Column(nullable = false)
     private int expireDay;
 
-    @Column(nullable = false)
-    private String packetCode;
-
-    @Column(nullable = false)
-    private String description;
-
-    @NotNull
-    @ManyToOne
-    private Company company;
+    public Long getExpireDayMillis() {
+        return expireDay * 1000L * 60 * 60 * 24;
+    }
 }

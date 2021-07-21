@@ -24,7 +24,7 @@ public class SimCard implements UserDetails {
     @GeneratedValue
     private Long id;
     private boolean block;
-    private String code;
+    private String companyCode;
     private String number;
     private double balance;
     private boolean active;
@@ -37,10 +37,10 @@ public class SimCard implements UserDetails {
     private Company company;
     @ManyToOne
     private User user;
-    @OneToOne
+    @ManyToOne
     private Tariff tariff;
     @ManyToOne
-    private PaketTraffic paketTraffic;
+    private PacketTraffic paketTraffic;
     @ManyToMany
     private Set<Role> roles;
     @Column(nullable = false,updatable = false)
@@ -73,7 +73,7 @@ public class SimCard implements UserDetails {
 
     @Override
     public String getUsername() {
-        return code+number;
+        return companyCode+number;
     }
 
     @Override

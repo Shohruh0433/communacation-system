@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.developer.communication_system.entity.SimCard;
 import uz.developer.communication_system.payload.ApiResponse;
 import uz.developer.communication_system.service.ClientService;
@@ -34,6 +31,20 @@ public class ClientController {
 
         }
 
+        @PutMapping("/changeTariff/{tariffId}")
+    public HttpEntity<?> changeTariff(@PathVariable Long tariffId){
+            SimCard simCard = (SimCard) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         ApiResponse apiResponse = clientService.changeTariff(tariffId,simCard);
+            return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
+        }
+
+    @GetMapping
+    public HttpEntity<?> getMyTariffTraffic(){
+
+        SimCard simCard = (SimCard) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ApiResponse apiResponse= clientService.getMyTariffTraffic(simCard);
+        return ResponseEntity.ok(apiResponse);
+    }
 
 
 

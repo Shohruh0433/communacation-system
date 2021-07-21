@@ -16,21 +16,21 @@ public class TariffTrafficController {
     @Autowired
     TariffTrafficService tariffTrafficService;
 
-    @PostMapping("/add")
-    public HttpEntity<?> add(@RequestBody TariffTraffic tariffTraffic) {
+//    @PostMapping("/add")
+//    public HttpEntity<?> add(@RequestBody TariffTraffic tariffTraffic) {
+//
+//        ApiResponse apiResponse = tariffTrafficService.add(tariffTraffic);
+//
+//        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+//    }
 
-        ApiResponse apiResponse = tariffTrafficService.add(tariffTraffic);
-
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
-    }
-
-    @GetMapping("/getAll")
-    public HttpEntity<?> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-
-        ApiResponse apiResponse = tariffTrafficService.getAll(page, size);
-
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
-    }
+//    @GetMapping("/getAll")
+//    public HttpEntity<?> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+//
+//        ApiResponse apiResponse = tariffTrafficService.getAll(page, size);
+//
+//        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+//    }
 
     @GetMapping("/getById/{id}")
     public HttpEntity<?> getById(@PathVariable Long id) {
@@ -39,15 +39,22 @@ public class TariffTrafficController {
 
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
+    @GetMapping("/getByCodeAndNumber")
+    public HttpEntity<?> getByCodeAndNumber(@RequestParam String companyCode,String number) {
 
-    @PutMapping("/edit/{id}")
-    public HttpEntity<?> edit(@RequestBody TariffTraffic tariffTraffic, @PathVariable Long id) {
-
-        ApiResponse apiResponse = tariffTrafficService.edit(tariffTraffic, id);
+        ApiResponse apiResponse = tariffTrafficService.getByCodeAndNumber(companyCode,number);
 
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
-
     }
+
+//    @PutMapping("/edit/{id}")
+//    public HttpEntity<?> edit(@RequestBody TariffTraffic tariffTraffic, @PathVariable Long id) {
+//
+//        ApiResponse apiResponse = tariffTrafficService.edit(tariffTraffic, id);
+//
+//        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+//
+//    }
 
 
 }
