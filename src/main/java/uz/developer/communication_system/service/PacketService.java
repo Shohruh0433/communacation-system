@@ -47,7 +47,7 @@ public class PacketService {
     public ApiResponse savePacket(PacketDto packetDto){
 
         Optional<Company> optionalCompany = companyRepository.findById(packetDto.getCompanyId());
-        if (!optionalCompany.isPresent())
+        if (optionalCompany.isEmpty())
             return new ApiResponse("no such company was found", false);
 
 
@@ -56,7 +56,7 @@ public class PacketService {
             return new ApiResponse("such code already exists", false);
 
         Packet packet = new Packet();
-        packet.setType(packetDto.getType());
+        packet.setPacketType(packetDto.getPacketType());
         packet.setAmount(packetDto.getAmount());
         packet.setPrice(packetDto.getPrice());
         packet.setExpireDay(packetDto.getExpireDay());
@@ -72,7 +72,7 @@ public class PacketService {
 
         Optional<Packet> optionalPacket
                 = packetRepository.findById(id);
-        if (!optionalPacket.isPresent())
+        if (optionalPacket.isEmpty())
             return new ApiResponse("Error!! edit is not packet", false);
 
         boolean exists
@@ -81,12 +81,12 @@ public class PacketService {
             return new ApiResponse("such code is available in the company",false);
 
         Optional<Company> optionalCompany = companyRepository.findById(packetDto.getCompanyId());
-        if (!optionalCompany.isPresent())
+        if (optionalCompany.isEmpty())
             return new ApiResponse("no such company was found", false);
 
 
         Packet packet = optionalPacket.get();
-        packet.setType(packetDto.getType());
+        packet.setPacketType(packetDto.getPacketType());
         packet.setAmount(packetDto.getAmount());
         packet.setPrice(packetDto.getPrice());
         packet.setExpireDay(packetDto.getExpireDay());

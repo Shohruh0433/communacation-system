@@ -43,6 +43,9 @@ public class Employee implements UserDetails {
 
     @OneToOne
     private User user;
+    
+    @ManyToOne
+    private Company company;
 
     @Column(unique = true)
     @Email

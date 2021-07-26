@@ -18,11 +18,14 @@ public class Payment {
     @Id
     @GeneratedValue
     private Long id;
-    private String code;
+
+    private String companyCode;
     private String number;
     @CreationTimestamp
     private Timestamp payDate;
     private String ownerPay;
     private String typePay;
     private double amount;
+    private  boolean state;
+
 }

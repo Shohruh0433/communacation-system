@@ -1,17 +1,17 @@
 package uz.developer.communication_system.payload;
 
 import lombok.Data;
+import uz.developer.communication_system.entity.enums.PacketType;
 
 import javax.validation.constraints.NotNull;
 
 @Data
 public class PacketDto {
 
-    @NotNull(message = "type is mandatory")
-    private String type;
+    private PacketType packetType;
 
     @NotNull(message = "amount is mandatory")
-    private double amount;
+    private int amount;
 
     @NotNull(message = "price is mandatory")
     private double price;

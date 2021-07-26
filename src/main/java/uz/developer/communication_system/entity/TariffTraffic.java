@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 
@@ -22,9 +20,12 @@ public class TariffTraffic {
     @Id
     @GeneratedValue 
     private Long id;
-
+    @Column(nullable = false)
     private String  number;
+    @Column(nullable = false)
     private String  companyCode;
+    @Column(unique = true,nullable = false)
+    private String simCardNumber;
     private double netLimitAll;
     private double netLimitTelegram;
     private double netLimitYoutube;

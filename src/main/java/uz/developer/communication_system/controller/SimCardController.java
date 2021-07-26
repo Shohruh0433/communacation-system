@@ -24,6 +24,7 @@ public class SimCardController {
         return simCardService.add(simCardDto);
     }
     //sim kartaga buyurtma ya'ni simm carta sotib olish
+
     @PostMapping("/order")
     public ApiResponse order(@Valid @RequestBody SimCardForOrderDto simCardForOrderDto){
         return simCardService.simCardOrder(simCardForOrderDto);
@@ -34,6 +35,11 @@ public class SimCardController {
         return simCardService.getSearchSimCard(simCardForSearchDto);
     }
 
+    @GetMapping("/get/searchByNumber")
+    public ApiResponse getByNumberSearchSimCard(@RequestBody SimCardForSearchDto simCardForSearchDto){
+        return simCardService.getByNumberSearchSimCard(simCardForSearchDto);
+    }
+
     @PostMapping("/block")
     public ApiResponse block(@RequestBody SimCardForSearchDto simCardForSearchDto){
         return  simCardService.blockSimCard(simCardForSearchDto);
@@ -42,7 +48,7 @@ public class SimCardController {
     //shu kompaniyaga tegishli barcha egasi yo'q sim kartalarni chiqarish
     @GetMapping("/get/{id}")
     public ApiResponse getSimCards(@PathVariable int id){
-        return simCardService.getAllUserNullSimcards(id);
+        return simCardService.getAllUserNullSimCards(id);
     }
 
     //shu userga tegishli sim card larni ko'rish

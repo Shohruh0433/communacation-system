@@ -23,15 +23,15 @@ public class SimCard implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
-    private boolean block;
+    private boolean block = false;
     private String companyCode;
     private String number;
     private double balance;
-    private boolean active;
+    private boolean active = false;
     @Column(nullable = false)
     private String password;
     private String pinCode;
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String simCardNumber;
     @ManyToOne
     private Company company;

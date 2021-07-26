@@ -23,12 +23,12 @@ public class Detalization {
     private Timestamp date;
     private String type;    //jaraoyon nomi
     private double price;
-    private String myCode;
+    private String myCompanyCode;
     private String myNumber;
-    private int length;
-    private String outCode;
+    private double length;
+    private String outCompanyCode;
     private String outNumber;
     private boolean input;     //kiruvchi
     private  boolean output;   //chiquvchi
-
+     private  String  state;   // holati
 }

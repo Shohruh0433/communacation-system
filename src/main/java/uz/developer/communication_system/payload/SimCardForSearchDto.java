@@ -5,13 +5,17 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
 public class SimCardForSearchDto {
 
-    private String code;
+    private String companyCode;
 
-    private String nomer;
+    @NotNull
+    private String number;
+
+    private Integer companyId;
 
 }

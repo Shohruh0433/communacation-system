@@ -18,7 +18,7 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    private String passportSeriya;
+    private String passportSeries;
     private String passportNumber;
     private String firstName;
     private String lastName;

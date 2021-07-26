@@ -14,11 +14,11 @@ public class SimCardForOrderDto {
     private String code;
     @Size(min = 7,max = 7)
     @NotNull
-    private String  nomer;
+    private String  number;
 
     @NotNull
     @Size(min = 2,max = 2)
-    private String passportSeria;
+    private String passportSeries;
 
 
     @NotNull

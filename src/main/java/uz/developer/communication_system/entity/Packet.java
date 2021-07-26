@@ -3,7 +3,7 @@ package uz.developer.communication_system.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.developer.communication_system.entity.enums.PacketEnum;
+import uz.developer.communication_system.entity.enums.PacketType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,14 +12,17 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "packet", uniqueConstraints = { @UniqueConstraint(columnNames = { "packetCode", "company" }) })
+//@Table(name = "packet", uniqueConstraints = { @UniqueConstraint(columnNames = { "packetCode", "company" }) })
+//@Table(name = "packet", uniqueConstraints = @UniqueConstraint(name = "company", columnNames = {
+//        "packetCode", "company" }))
+
 public class Packet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
-    private PacketEnum packetType;
+    private PacketType packetType;
     @Column(nullable = false)
     private int amount;
     @Column(nullable = false)
@@ -28,6 +31,7 @@ public class Packet {
     private String packetCode;
     @Column(nullable = false)
     private String description;
+
     @NotNull
     @ManyToOne
     private Company company;

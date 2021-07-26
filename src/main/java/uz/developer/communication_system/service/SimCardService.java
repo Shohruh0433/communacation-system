@@ -37,16 +37,32 @@ public  class SimCardService {
 
     //nomer orqali bo'sh bo'lgan sim kartani qidirish
     public  ApiResponse getSearchSimCard(SimCardForSearchDto simCardForSearchDto) {
-        List<SimCard> allByCodeOrNumberContainsAndUserNull = simCardRepository.findAllByCodeOrNumberContainsAndUserNull(
-                simCardForSearchDto.getCode(), simCardForSearchDto.getNomer());
-        return new ApiResponse("natija: ", true, allByCodeOrNumberContainsAndUserNull);
+
+        List<SimCard> simCardList;
+        if (simCardForSearchDto.getCompanyCode() == null){
+            simCardList = simCardRepository.findAllByNumberContainsAndCompanyIdAndUserNull(
+                    simCardForSearchDto.getNumber(), simCardForSearchDto.getCompanyId());
+        }
+        else {
+            simCardList = simCardRepository.findAllByNumberContainsAndUserNullAndCompanyCode(
+                    simCardForSearchDto.getNumber(), simCardForSearchDto.getCompanyCode());
+        }
+        return new ApiResponse("natija: ", true, simCardList);
     }
 
 
+    public  ApiResponse getByNumberSearchSimCard(SimCardForSearchDto simCardForSearchDto) {
+
+        Optional<SimCard> optionalSimCard = simCardRepository.findByCompanyCodeAndNumber(
+                 simCardForSearchDto.getCompanyCode(),  simCardForSearchDto.getNumber());
+        return optionalSimCard.map(simCard -> new ApiResponse(
+       "natija: ", true, simCard)).orElseGet(() -> new ApiResponse("not found: ", false));
+    }
+
     //sim kartaga buyurtma ya'ni simm carta sotib olish
     public ApiResponse simCardOrder(SimCardForOrderDto simCardForOrderDto) {
-        Optional<SimCard> optionalSimCard = simCardRepository.findByCodeAndNumberAndUserNull(
-                simCardForOrderDto.getCode(),  simCardForOrderDto.getNomer());
+        Optional<SimCard> optionalSimCard = simCardRepository.findByCompanyCodeAndNumberAndUserNull(
+                simCardForOrderDto.getCode(),  simCardForOrderDto.getNumber());
         if (optionalSimCard.isEmpty())
             return new ApiResponse("Sorry this sim card already buyed", false);
 
@@ -58,7 +74,7 @@ public  class SimCardService {
         if (optionalTariff.isEmpty())
             return new ApiResponse("this Tariff not found", false);
 
-        ApiResponse apiResponse = getPassportBySeriesAndNumber(simCardForOrderDto.getPassportSeria(),
+        ApiResponse apiResponse = getPassportBySeriesAndNumber(simCardForOrderDto.getPassportSeries(),
                 simCardForOrderDto.getPassportNumber());
         if (!apiResponse.isSuccess())
             return apiResponse;
@@ -71,7 +87,7 @@ public  class SimCardService {
         simCard.setCompanyCode(simCardForOrderDto.getCode());
         simCard.setUser(user);
         simCard.setCompany(codesCompany.get().getCompany());
-        simCard.setNumber(simCardForOrderDto.getNomer());
+        simCard.setNumber(simCardForOrderDto.getNumber());
         simCard.setTariff(optionalTariff.get());
         simCardRepository.save(simCard);
         return new ApiResponse("Successfully ordered", true);
@@ -81,8 +97,8 @@ public  class SimCardService {
 
     //sim kartani blocklash
     public ApiResponse blockSimCard(SimCardForSearchDto simCardForSearchDto) {
-        Optional<SimCard> optionalSimCard = simCardRepository.findByCodeAndNumber(
-                simCardForSearchDto.getCode(), simCardForSearchDto.getNomer());
+        Optional<SimCard> optionalSimCard = simCardRepository.findByCompanyCodeAndNumber(
+                simCardForSearchDto.getCompanyCode(), simCardForSearchDto.getNumber());
         if (optionalSimCard.isEmpty())
             return new ApiResponse("this sim card not found", false);
         SimCard simCard = optionalSimCard.get();
@@ -94,21 +110,21 @@ public  class SimCardService {
 
 
     //shu kompaniyaga tegishli barcha egasi yo'q sim kartalarni chiqarish
-    public ApiResponse getAllUserNullSimcards(int companyId) {
+    public ApiResponse getAllUserNullSimCards(int companyId) {
         return new ApiResponse("result", true, simCardRepository.findAllByUserIsNullAndCompany_Id(companyId));
     }
 
 
     //shu userga tegishli sim card larni ko'rish
-    public ApiResponse getAllByUserPassport(String seria, String number) {
+    public ApiResponse getAllByUserPassport(String series, String number) {
         return new ApiResponse("result", true,
-                simCardRepository.findAllByUser_PassportSeriyaAndUser_PassportNumber(seria, number));
+                simCardRepository.findAllByUser_PassportSeriesAndUser_PassportNumber(series, number));
     }
 
 
     //yangi nomerlarni bazaga kiritiish ya'ni egasi yoq nomerlarni
     public ApiResponse add(SimCardDto simCardDto) {
-        Optional<SimCard> optionalSimCard = simCardRepository.findByCodeAndNumber(simCardDto.getCode(), simCardDto.getNumber());
+        Optional<SimCard> optionalSimCard = simCardRepository.findByCompanyCodeAndNumber(simCardDto.getCode(), simCardDto.getNumber());
         if (optionalSimCard.isEmpty()) {
             Optional<CodesCompany> byCode = codesCompanyRepository.findByCode(simCardDto.getCode());
             if (byCode.isEmpty())
@@ -147,14 +163,14 @@ public  class SimCardService {
         Passport passport = exchange.getBody();
         if (passport == null)
             return new ApiResponse("passport not found", false);
-
+ 
         User user = new User();
         user.setBirthDate(passport.getBirthDate());
         user.setFirstName(passport.getFirstName());
         user.setLegal(passport.isLegal());
         user.setLastName(passport.getLastName());
         user.setPassportNumber(passport.getPassportNumber());
-        user.setPassportSeriya(passport.getPassportSeria());
+        user.setPassportSeries(passport.getPassportSeria());
 
         return new ApiResponse("successfully", true,user);
 

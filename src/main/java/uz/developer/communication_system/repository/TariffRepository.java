@@ -18,4 +18,6 @@ boolean existsByName(String name);
     Page<Tariff> findAllByLegalIsFalseAndCompanyId(Integer company_id, Pageable pageable);
 
     Page<Tariff> findAllByLegalIsTrueAndCompanyId(Integer company_id, Pageable pageable);
+
+
 }

@@ -3,12 +3,9 @@ package uz.developer.communication_system.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.developer.communication_system.entity.enums.PacketEnum;
+import uz.developer.communication_system.entity.enums.PacketType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -20,18 +17,19 @@ public class PacketTraffic {
     @GeneratedValue
     private Integer id;
 
-//    private PacketEnum packetType;
+    @Column(nullable = false)
+    private PacketType packetType;
+    @Column(nullable = false)
+    private String companyCode;
+    @Column(nullable = false)
+    private String  number;
+    private Date trafficExpireDate;
     private int amount;
 
     @ManyToOne
-    private Packet packet;
-
-    private String companyCode;
-    private String  number;
-    private Date trafficExpireDate;
-
-    @ManyToOne
     private  SimCard simCard;
+    @ManyToOne
+    private Packet packet;
 
 //    private double netLimitAll;
 //    private double netLimitTelegram;
