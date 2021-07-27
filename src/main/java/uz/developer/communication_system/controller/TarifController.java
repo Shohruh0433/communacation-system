@@ -61,52 +61,38 @@ public class TarifController {
 
     }
 
-    @GetMapping("/get/{companyId}")
-    public HttpEntity<?> getByCompany(@PathVariable Integer companyId,
-                                      @RequestParam(defaultValue = "0") int page,
+    @GetMapping("/get/active")
+    public HttpEntity<?> getByActive( @RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "10") int size){
 
-        ApiResponse apiResponse = tariffService.getByCompany(companyId,page,size);
+        ApiResponse apiResponse = tariffService.getByActive(page,size);
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }
 
-    @GetMapping("/get/activeForCompany/{companyId}")
-    public HttpEntity<?> getByActiveForCompany(@PathVariable Integer companyId ,
-                                      @RequestParam(defaultValue = "0") int page,
-                                      @RequestParam(defaultValue = "10") int size){
-
-        ApiResponse apiResponse = tariffService.getByActiveForCompany(companyId,page,size);
-
-        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
-    }
-
-    @GetMapping("/get/deletedForCompany/{companyId}}")
-    public HttpEntity<?> getByDeletedForCompany(@PathVariable Integer companyId ,
-                                          @RequestParam(defaultValue = "0") int page,
+    @GetMapping("/get/deleted")
+    public HttpEntity<?> getByDeleted(  @RequestParam(defaultValue = "0") int page,
                                           @RequestParam(defaultValue = "10") int size){
 
-        ApiResponse apiResponse = tariffService.getByDeletedForCompany(companyId,page,size);
+        ApiResponse apiResponse = tariffService.getByDeleted(page,size);
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }
 
-    @GetMapping("/get/byLegalForCompany/{companyId}")
-    public HttpEntity<?> getByLegalForCompany(@PathVariable Integer companyId ,
-                                          @RequestParam(defaultValue = "0") int page,
+    @GetMapping("/get/byLegal")
+    public HttpEntity<?> getByLegal( @RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "10") int size){
 
-        ApiResponse apiResponse = tariffService.getByLegalForCompany(companyId,page,size);
+        ApiResponse apiResponse = tariffService.getByLegal(page,size);
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }
 
-    @GetMapping("/get/byPhysicalForCompany/{companyId}")
-    public HttpEntity<?> getByPhysicalForCompany(@PathVariable Integer companyId ,
-                                           @RequestParam(defaultValue = "0") int page,
+    @GetMapping("/get/byPhysical")
+    public HttpEntity<?> getByPhysical(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "10") int size){
 
-        ApiResponse apiResponse = tariffService.getByPhysicalForCompany(companyId,page,size);
+        ApiResponse apiResponse = tariffService.getByPhysical(page,size);
 
         return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
     }

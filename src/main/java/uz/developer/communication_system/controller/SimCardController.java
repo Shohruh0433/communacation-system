@@ -46,9 +46,9 @@ public class SimCardController {
     }
 
     //shu kompaniyaga tegishli barcha egasi yo'q sim kartalarni chiqarish
-    @GetMapping("/get/{id}")
-    public ApiResponse getSimCards(@PathVariable int id){
-        return simCardService.getAllUserNullSimCards(id);
+    @GetMapping("/get")
+    public ApiResponse getUserNullSimCards(){
+        return simCardService.getAllUserNullSimCards();
     }
 
     //shu userga tegishli sim card larni ko'rish

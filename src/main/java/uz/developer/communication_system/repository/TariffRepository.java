@@ -9,15 +9,10 @@ public interface TariffRepository extends JpaRepository<Tariff,Long> {
 
 boolean existsByName(String name);
 
-    Page<Tariff> findAllByCompanyId(Integer company_id, Pageable pageable);
-
-    Page<Tariff> findAllByActiveIsTrueAndCompany_Id(Integer company_id, Pageable pageable);
-
-    Page<Tariff> findAllByActiveIsFalseAndCompanyId(Integer company_id, Pageable pageable);
-
-    Page<Tariff> findAllByLegalIsFalseAndCompanyId(Integer company_id, Pageable pageable);
-
-    Page<Tariff> findAllByLegalIsTrueAndCompanyId(Integer company_id, Pageable pageable);
+     Page<Tariff> findAllByActiveIsTrue(Pageable pageable);
+    Page<Tariff> findAllByActiveIsFalse(Pageable pageable);
+     Page<Tariff> findAllByLegalIsFalse(Pageable pageable);
+      Page<Tariff> findAllByLegalIsTrue(Pageable pageable);
 
 
 }

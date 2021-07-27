@@ -15,6 +15,5 @@ public class ServiceDto {
     private double priceOfMonth;
     private double priceOfDay;
     private boolean active;
-    private Integer companyId;
 
 }

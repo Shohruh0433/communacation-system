@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -17,8 +16,7 @@ public class Tariff {
     private Long id;
     private String name;
     private boolean legal ; // legal => true , physical => false ,default physical
-    @ManyToOne
-    private Company company;
+
     private double transitionPrice;
     private boolean active = true;
     private double priceOfMonth;

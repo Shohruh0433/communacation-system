@@ -5,11 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import uz.developer.communication_system.entity.Company;
+import uz.developer.communication_system.entity.Branch;
 import uz.developer.communication_system.entity.Tariff;
 import uz.developer.communication_system.payload.ApiResponse;
 import uz.developer.communication_system.payload.TariffDto;
-import uz.developer.communication_system.repository.CompanyRepository;
+import uz.developer.communication_system.repository.BranchRepository;
 import uz.developer.communication_system.repository.TariffRepository;
 
 import java.util.Optional;
@@ -20,22 +20,16 @@ public class TariffService {
     @Autowired
     TariffRepository tariffRepository;
     @Autowired
-    CompanyRepository companyRepository;
+    BranchRepository branchRepository;
 
 
     public ApiResponse add(TariffDto tariffDto) {
 
         try {
-            Optional<Company> optionalCompany = companyRepository.findById(tariffDto.getCompanyId());
-            if (optionalCompany.isEmpty())
-                return new ApiResponse("Not found Company",false);
-
             if (tariffRepository.existsByName(tariffDto.getName()))
                 return new ApiResponse("Already exist this name",false);
 
             Tariff tariff = new Tariff();
-
-     tariff.setCompany(optionalCompany.get());
          tariff.setExpireDay(tariffDto.getExpireDay());
          tariff.setLegal(tariffDto.isLegal());
          tariff.setName(tariffDto.getName());
@@ -87,16 +81,11 @@ public class TariffService {
             if (optionalTariff.isEmpty())
                 return new ApiResponse("Not found Tariff",false);
 
-            Optional<Company> optionalCompany = companyRepository.findById(tariffDto.getCompanyId());
-            if (optionalCompany.isEmpty())
-                return new ApiResponse("Not found Company",false);
-
             if (tariffRepository.existsByName(tariffDto.getName()))
                 return new ApiResponse("Already exist this name",false);
 
             Tariff tariff = optionalTariff.get();
             tariff.setExpireDay(tariffDto.getExpireDay());
-            tariff.setCompany(optionalCompany.get());
             tariff.setLegal(tariffDto.isLegal());
             tariff.setName(tariffDto.getName());
             tariff.setMinuteInNet(tariffDto.getMinuteInNet());
@@ -132,44 +121,35 @@ public class TariffService {
 
     }
 
-    public ApiResponse getByCompany(Integer companyId, int page, int size) {
+    public ApiResponse getByActive(int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByCompanyId(companyId,pageable);
+        Page<Tariff> pages = tariffRepository.findAllByActiveIsTrue(pageable);
+
+        return new ApiResponse("success ",true,pages);
+    }
+
+    public ApiResponse getByDeleted(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Tariff> pages = tariffRepository.findAllByActiveIsFalse(pageable);
 
         return new ApiResponse("success ",true,pages);
 
     }
 
-    public ApiResponse getByActiveForCompany(Integer companyId ,int page, int size) {
+    public ApiResponse getByLegal(int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByActiveIsTrueAndCompany_Id(companyId,pageable);
+        Page<Tariff> pages = tariffRepository.findAllByLegalIsTrue(pageable);
 
         return new ApiResponse("success ",true,pages);
     }
 
-    public ApiResponse getByDeletedForCompany(Integer companyId ,int page, int size) {
+    public ApiResponse getByPhysical(int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByActiveIsFalseAndCompanyId(companyId,pageable);
-
-        return new ApiResponse("success ",true,pages);
-
-    }
-
-    public ApiResponse getByLegalForCompany(Integer companyId ,int page, int size) {
-
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByLegalIsTrueAndCompanyId(companyId,pageable);
-
-        return new ApiResponse("success ",true,pages);
-    }
-
-    public ApiResponse getByPhysicalForCompany(Integer companyId ,int page, int size) {
-
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Tariff> pages = tariffRepository.findAllByLegalIsFalseAndCompanyId(companyId,pageable);
+        Page<Tariff> pages = tariffRepository.findAllByLegalIsFalse(pageable);
 
         return new ApiResponse("success ",true,pages);
     }

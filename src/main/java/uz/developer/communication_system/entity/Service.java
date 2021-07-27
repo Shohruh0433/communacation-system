@@ -25,8 +25,5 @@ public class Service {
     private double priceOfMonth;
     private double priceOfDay;
     private boolean active = true;
-
-    @ManyToOne
-    private Company company;
 }
 

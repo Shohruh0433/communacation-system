@@ -13,9 +13,7 @@ public class CodesCompany {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String code;
+    private String companyCode;
 
-    @ManyToOne
-    private Company company;
 
 }

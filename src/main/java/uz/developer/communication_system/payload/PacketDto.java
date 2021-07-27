@@ -25,7 +25,4 @@ public class PacketDto {
     @NotNull(message = "description is mandatory")
     private String description;
 
-    @NotNull(message = "companyId is mandatory")
-    private Integer companyId;
-
 }

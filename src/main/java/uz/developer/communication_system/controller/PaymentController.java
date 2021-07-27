@@ -30,15 +30,6 @@ public class PaymentController {
             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         ApiResponse apiResponse= paymentService.getAll(page,size);
         return ResponseEntity.ok(apiResponse);
-
-    }
-
-    @GetMapping("/getByCompany/{companyId}")
-    public HttpEntity<?> getByCompany(@PathVariable Integer companyId,
-      @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
-        ApiResponse apiResponse= paymentService.getByCompany(companyId,page,size);
-        return ResponseEntity.ok(apiResponse);
-
     }
 
     @GetMapping("/getByStateTrue")
@@ -53,22 +44,6 @@ public class PaymentController {
     public HttpEntity<?> getByStateFalse(
             @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         ApiResponse apiResponse= paymentService.getByStateFalse(page,size);
-        return ResponseEntity.ok(apiResponse);
-
-    }
-
-    @GetMapping("/getByStateTrue/{companyId}")
-    public HttpEntity<?> getByStateTrueAndCompanyId(@PathVariable Integer companyId,
-            @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
-        ApiResponse apiResponse= paymentService.getByStateTrueAndCompanyId(companyId,page,size);
-        return ResponseEntity.ok(apiResponse);
-
-    }
-
-    @GetMapping("/getByStateFalse/{companyId}")
-    public HttpEntity<?> getByStateFalseAndCompanyId(@PathVariable Integer companyId,
-                                                    @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
-        ApiResponse apiResponse= paymentService.getByStateFalseAndCompanyId(companyId,page,size);
         return ResponseEntity.ok(apiResponse);
 
     }

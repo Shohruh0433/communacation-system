@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Company {
+public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,10 +22,6 @@ public class Company {
     private boolean active =true;
 
     @ManyToOne
-    private Company company;
-
-    @ManyToOne
     private District district;
-
-
+    
 }

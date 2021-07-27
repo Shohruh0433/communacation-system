@@ -1,7 +1,6 @@
 package uz.developer.communication_system.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.embedded.undertow.UndertowServletWebServer;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,9 +24,7 @@ public  class SimCardService {
 
     @Autowired
     SimCardRepository simCardRepository;
-    @Autowired
-    CompanyRepository companyRepository;
-    @Autowired
+     @Autowired
     CodesCompanyRepository codesCompanyRepository;
     @Autowired
     TariffRepository tariffRepository;
@@ -40,8 +37,8 @@ public  class SimCardService {
 
         List<SimCard> simCardList;
         if (simCardForSearchDto.getCompanyCode() == null){
-            simCardList = simCardRepository.findAllByNumberContainsAndCompanyIdAndUserNull(
-                    simCardForSearchDto.getNumber(), simCardForSearchDto.getCompanyId());
+            simCardList = simCardRepository.findAllByNumberContainsAndUserNull(
+                    simCardForSearchDto.getNumber());
         }
         else {
             simCardList = simCardRepository.findAllByNumberContainsAndUserNullAndCompanyCode(
@@ -86,7 +83,6 @@ public  class SimCardService {
         simCard.setActive(true);
         simCard.setCompanyCode(simCardForOrderDto.getCode());
         simCard.setUser(user);
-        simCard.setCompany(codesCompany.get().getCompany());
         simCard.setNumber(simCardForOrderDto.getNumber());
         simCard.setTariff(optionalTariff.get());
         simCardRepository.save(simCard);
@@ -110,8 +106,8 @@ public  class SimCardService {
 
 
     //shu kompaniyaga tegishli barcha egasi yo'q sim kartalarni chiqarish
-    public ApiResponse getAllUserNullSimCards(int companyId) {
-        return new ApiResponse("result", true, simCardRepository.findAllByUserIsNullAndCompany_Id(companyId));
+    public ApiResponse getAllUserNullSimCards() {
+        return new ApiResponse("result", true, simCardRepository.findAllByUserIsNull());
     }
 
 
@@ -132,7 +128,6 @@ public  class SimCardService {
 
             SimCard simCard = new SimCard();
             simCard.setActive(false);
-            simCard.setCompany(byCode.get().getCompany());
             simCard.setCompanyCode(simCardDto.getCode());
             simCard.setNumber(simCardDto.getNumber());
             simCard.setTariff(null);

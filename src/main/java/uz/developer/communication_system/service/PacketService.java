@@ -5,11 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import uz.developer.communication_system.entity.Company;
+import uz.developer.communication_system.entity.Branch;
 import uz.developer.communication_system.entity.Packet;
 import uz.developer.communication_system.payload.ApiResponse;
 import uz.developer.communication_system.payload.PacketDto;
-import uz.developer.communication_system.repository.CompanyRepository;
+import uz.developer.communication_system.repository.BranchRepository;
 import uz.developer.communication_system.repository.PacketRepository;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class PacketService {
     @Autowired
     private PacketRepository packetRepository;
     @Autowired
-    private CompanyRepository companyRepository;
+    private BranchRepository companyRepository;
 
 
     public List<Packet> getPackets(int page, int size){
@@ -30,28 +30,15 @@ public class PacketService {
         return packets.getContent();
     }
 
-    public List<Packet> getCompanyPacket(Integer id, int page, int size){
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Packet> allByCompanyId = packetRepository.findAllByCompanyId(id, pageable);
-        return allByCompanyId.getContent();
-    }
-
-
     public Packet getPacket(Integer id){
         Optional<Packet> optionalPacket
                 = packetRepository.findById(id);
         return optionalPacket.orElse(null);
     }
 
-
     public ApiResponse savePacket(PacketDto packetDto){
 
-        Optional<Company> optionalCompany = companyRepository.findById(packetDto.getCompanyId());
-        if (optionalCompany.isEmpty())
-            return new ApiResponse("no such company was found", false);
-
-
-        boolean exists = packetRepository.existsByPacketCodeAndCompanyIdNot(packetDto.getPacketCode(), packetDto.getCompanyId());
+        boolean exists = packetRepository.existsByPacketCode(packetDto.getPacketCode());
         if (exists)
             return new ApiResponse("such code already exists", false);
 
@@ -62,7 +49,6 @@ public class PacketService {
         packet.setExpireDay(packetDto.getExpireDay());
         packet.setDescription(packetDto.getDescription());
         packet.setPacketCode(packetDto.getPacketCode());
-        packet.setCompany(optionalCompany.get());
 
         packetRepository.save(packet);
         return new ApiResponse("saved packet", true);
@@ -76,14 +62,9 @@ public class PacketService {
             return new ApiResponse("Error!! edit is not packet", false);
 
         boolean exists
-                = packetRepository.existsByPacketCodeAndCompanyIdNot(packetDto.getPacketCode(), packetDto.getCompanyId());
+                = packetRepository.existsByPacketCode(packetDto.getPacketCode());
         if (exists)
             return new ApiResponse("such code is available in the company",false);
-
-        Optional<Company> optionalCompany = companyRepository.findById(packetDto.getCompanyId());
-        if (optionalCompany.isEmpty())
-            return new ApiResponse("no such company was found", false);
-
 
         Packet packet = optionalPacket.get();
         packet.setPacketType(packetDto.getPacketType());
@@ -91,8 +72,6 @@ public class PacketService {
         packet.setPrice(packetDto.getPrice());
         packet.setExpireDay(packetDto.getExpireDay());
         packet.setDescription(packetDto.getDescription());
-        packet.setCompany(optionalCompany.get());
-
         packetRepository.save(packet);
         return new ApiResponse("edit packet",true);
 

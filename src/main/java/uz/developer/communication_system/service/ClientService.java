@@ -24,6 +24,8 @@ public class ClientService {
     PacketRepository packetRepository;
     @Autowired
     PacketTrafficRepository packetTrafficRepository;
+    @Autowired
+    CodesCompanyRepository codesCompanyRepository;
 
     public ApiResponse getBalance(SimCard simCard) {
         return new ApiResponse("successfully", true, simCard.getBalance());
@@ -187,7 +189,8 @@ public class ClientService {
                 tariffTrafficRepository.findBySimCardNumber(simCard.getSimCardNumber());
         TariffTraffic tariffTraffic = optionalTariffTraffic.get();
 
-        if (simCard.getCompany() == receiveSimCard.getCompany()) {
+        Optional<CodesCompany> optionalCodesCompany = codesCompanyRepository.findByCode(receiveSimCard.getCompanyCode());
+        if (optionalCodesCompany.isPresent()){
             if (tariffTraffic.getMinuteInNet() >= 1) {
                 /////////////////////////
                 return new ApiResponse("success", true);

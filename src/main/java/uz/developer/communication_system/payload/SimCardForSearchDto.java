@@ -16,6 +16,5 @@ public class SimCardForSearchDto {
     @NotNull
     private String number;
 
-    private Integer companyId;
 
 }

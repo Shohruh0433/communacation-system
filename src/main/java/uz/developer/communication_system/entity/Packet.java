@@ -32,10 +32,6 @@ public class Packet {
     @Column(nullable = false)
     private String description;
 
-    @NotNull
-    @ManyToOne
-    private Company company;
-
     @Column(nullable = false)
     private int expireDay;
 

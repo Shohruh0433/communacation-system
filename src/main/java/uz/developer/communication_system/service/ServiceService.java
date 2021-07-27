@@ -5,12 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import uz.developer.communication_system.entity.Company;
-import uz.developer.communication_system.entity.Region;
+import uz.developer.communication_system.entity.Branch;
 import uz.developer.communication_system.entity.ServiceCategory;
 import uz.developer.communication_system.payload.ApiResponse;
 import uz.developer.communication_system.payload.ServiceDto;
-import uz.developer.communication_system.repository.CompanyRepository;
+import uz.developer.communication_system.repository.BranchRepository;
 import uz.developer.communication_system.repository.ServiceCategoryRepository;
 import uz.developer.communication_system.repository.ServiceRepository;
 
@@ -23,8 +22,6 @@ public class ServiceService {
     ServiceRepository serviceRepository;
     @Autowired
     ServiceCategoryRepository serviceCategoryRepository;
-    @Autowired
-    CompanyRepository companyRepository;
 
 
     public ApiResponse add(ServiceDto serviceDto) {
@@ -38,14 +35,8 @@ public class ServiceService {
             if (optionalServiceCategory.isEmpty())
                 return new ApiResponse("Not Found Service Category", false);
 
-            Optional<Company> optionalCompany =
-                    companyRepository.findById(serviceDto.getCompanyId());
-            if (optionalCompany.isEmpty())
-                return new ApiResponse("Not Found Company", false);
-
             uz.developer.communication_system.entity.Service service=new uz.developer.communication_system.entity.Service();
             service.setName(serviceDto.getName());
-            service.setCompany(optionalCompany.get());
             service.setServiceCode(serviceDto.getServiceCode());
             service.setDescription(serviceDto.getDescription());
             service.setPriceOfDay(serviceDto.getPriceOfDay());
@@ -90,14 +81,8 @@ public class ServiceService {
             if (optionalServiceCategory.isEmpty())
                 return new ApiResponse("Not Found  Service Category", false);
 
-            Optional<Company> optionalCompany =
-                    companyRepository.findById(serviceDto.getCompanyId());
-            if (optionalCompany.isEmpty())
-                return new ApiResponse("Not Found Company", false);
-
             uz.developer.communication_system.entity.Service service=optionalService.get();
             service.setName(serviceDto.getName());
-            service.setCompany(optionalCompany.get());
             service.setActive(serviceDto.isActive());
             service.setServiceCode(serviceDto.getServiceCode());
             service.setDescription(serviceDto.getDescription());
@@ -109,16 +94,6 @@ public class ServiceService {
         }catch (Exception e){
             return new ApiResponse("did not edited Service", false);
         }
-
-    }
-
-    public ApiResponse getByCompany(Integer companyId, int page, int size) {
-
-        Pageable pageable = PageRequest.of(page,size);
-        Page<uz.developer.communication_system.entity.Service> pages =
-                serviceRepository.findAllByCompanyId(companyId,pageable);
-
-        return new ApiResponse("success ",true,pages);
 
     }
 

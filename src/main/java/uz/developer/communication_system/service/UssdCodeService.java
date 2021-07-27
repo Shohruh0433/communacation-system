@@ -5,12 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import uz.developer.communication_system.entity.Company;
-import uz.developer.communication_system.entity.Region;
+import uz.developer.communication_system.entity.Branch;
 import uz.developer.communication_system.entity.UssdCode;
 import uz.developer.communication_system.payload.ApiResponse;
 import uz.developer.communication_system.payload.UssdCodeDto;
-import uz.developer.communication_system.repository.CompanyRepository;
+import uz.developer.communication_system.repository.BranchRepository;
 import uz.developer.communication_system.repository.UssdCodeRepository;
 
 import java.util.Optional;
@@ -21,7 +20,7 @@ public class UssdCodeService {
     @Autowired
     UssdCodeRepository ussdCodeRepository;
     @Autowired
-    CompanyRepository companyRepository;
+    BranchRepository companyRepository;
 
 
     public ApiResponse add(UssdCodeDto ussdCodeDto) {
@@ -29,7 +28,7 @@ public class UssdCodeService {
             if (ussdCodeRepository.existsByCodeAndCompany_Id(ussdCodeDto.getCode(),ussdCodeDto.getCompanyId()))
                 return new ApiResponse("Already exist Code and Company", false);
 
-            Optional<Company> optionalCompany = companyRepository.findById(ussdCodeDto.getCompanyId());
+            Optional<Branch> optionalCompany = companyRepository.findById(ussdCodeDto.getCompanyId());
             if (optionalCompany.isEmpty())
                 return new ApiResponse("Not found Company", false);
 
@@ -70,7 +69,7 @@ public class UssdCodeService {
             if (ussdCodeRepository.existsByCodeAndCompany_Id(ussdCodeDto.getCode(),ussdCodeDto.getCompanyId()))
                 return new ApiResponse("Already exist Code and Company", false);
 
-            Optional<Company> optionalCompany = companyRepository.findById(ussdCodeDto.getCompanyId());
+            Optional<Branch> optionalCompany = companyRepository.findById(ussdCodeDto.getCompanyId());
             if (optionalCompany.isEmpty())
                 return new ApiResponse("Not found Company", false);
 

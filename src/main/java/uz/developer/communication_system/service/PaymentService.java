@@ -6,11 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import uz.developer.communication_system.entity.Company;
 import uz.developer.communication_system.entity.Payment;
 import uz.developer.communication_system.entity.SimCard;
 import uz.developer.communication_system.payload.ApiResponse;
-import uz.developer.communication_system.repository.CompanyRepository;
+import uz.developer.communication_system.repository.BranchRepository;
 import uz.developer.communication_system.repository.PaymentRepository;
 import uz.developer.communication_system.repository.SimCardRepository;
 
@@ -22,9 +21,6 @@ public class PaymentService {
     PaymentRepository paymentRepository;
     @Autowired
     SimCardRepository simCardRepository;
-    @Autowired
-    CompanyRepository companyRepository;
-
 
     public ApiResponse pay(Payment payment){
 
@@ -48,14 +44,6 @@ public class PaymentService {
 
     }
 
-
-    public ApiResponse getByCompany(Integer companyId,int page, int size) {
-
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Payment> pages = paymentRepository.findAllByCompany_Id(companyId, pageable);
-        return new ApiResponse("success",true,pages);
-    }
-
     public ApiResponse getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
         Page<Payment> pages = paymentRepository.findAll( pageable);
@@ -75,19 +63,6 @@ public class PaymentService {
         Page<Payment> pages = paymentRepository.findAllByStateFalse( pageable);
         return new ApiResponse("success",true,pages);
 
-    }
-
-
-    public ApiResponse getByStateTrueAndCompanyId(Integer companyId, int page, int size) {
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Payment> pages = paymentRepository.findAllByStateTrueAndCompany_Id(companyId, pageable);
-        return new ApiResponse("success",true,pages);
-    }
-
-    public ApiResponse getByStateFalseAndCompanyId(Integer companyId, int page, int size) {
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Payment> pages = paymentRepository.findAllByStateFalseAndCompany_Id( companyId,pageable);
-        return new ApiResponse("success",true,pages);
     }
 
     public ApiResponse getById(Long id) {

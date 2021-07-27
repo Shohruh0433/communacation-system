@@ -5,24 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.developer.communication_system.entity.Company;
-import uz.developer.communication_system.entity.Region;
 import uz.developer.communication_system.payload.ApiResponse;
-import uz.developer.communication_system.payload.CompanyDto;
-import uz.developer.communication_system.service.CompanyService;
+import uz.developer.communication_system.payload.BranchDto;
+import uz.developer.communication_system.service.BranchService;
 
 @RestController
 @RequestMapping ("/api/company")
 
-public class CompanyController {
+public class BranchController {
 
     @Autowired
-    CompanyService companyService;
+    BranchService companyService;
 
 
 
     @PostMapping("/add")
-    public HttpEntity<?> add(@RequestBody CompanyDto companyDto){
+    public HttpEntity<?> add(@RequestBody BranchDto companyDto){
 
         ApiResponse apiResponse = companyService.add(companyDto);
 
@@ -46,7 +44,7 @@ public class CompanyController {
     }
 
     @PutMapping("/edit/{id}")
-    public HttpEntity<?> edit(@RequestBody CompanyDto companyDto , @PathVariable Integer id ){
+    public HttpEntity<?> edit(@RequestBody BranchDto companyDto , @PathVariable Integer id ){
 
         ApiResponse apiResponse = companyService.edit(companyDto,id);
 

@@ -34,8 +34,6 @@ public class SimCard implements UserDetails {
     @Column(unique = true,nullable = false)
     private String simCardNumber;
     @ManyToOne
-    private Company company;
-    @ManyToOne
     private User user;
     @ManyToOne
     private Tariff tariff;

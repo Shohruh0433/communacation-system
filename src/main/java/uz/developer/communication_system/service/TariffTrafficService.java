@@ -12,6 +12,7 @@ import uz.developer.communication_system.entity.TariffTraffic;
 import uz.developer.communication_system.payload.ApiResponse;
 import uz.developer.communication_system.repository.TariffTrafficRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,27 +20,6 @@ public class TariffTrafficService {
 
     @Autowired
     TariffTrafficRepository tariffTrafficRepository;
-
-
-//    public ApiResponse add(TariffTraffic tariffTraffic) {
-//
-//        try {
-//            tariffTrafficRepository.save(tariffTraffic);
-//            return new ApiResponse("TariffTraffic added ", true);
-//        }catch (Exception e){
-//            return new ApiResponse("did not added TariffTraffic", false);
-//        }
-//
-//    }
-
-//    public ApiResponse getAll(int page, int size) {
-//
-//        Pageable pageable = PageRequest.of(page,size);
-//        Page<TariffTraffic> pages = tariffTrafficRepository.findAll(pageable);
-//
-//        return new ApiResponse("success ",true,pages);
-//    }
-
 
     public ApiResponse getById(Long id) {
 
@@ -57,21 +37,9 @@ public class TariffTrafficService {
                 -> new ApiResponse("not found", false));
     }
 
-//    public ApiResponse edit(TariffTraffic tariffTraffic, Long id) {
-//
-//        try {
-//            Optional<TariffTraffic> optionalTariffTraffic = tariffTrafficRepository.findById(id);
-//            if (optionalTariffTraffic.isEmpty())
-//                return new ApiResponse("TariffTraffic not found ", false);
-//
-//            tariffTrafficRepository.save(tariffTraffic);
-//            return new ApiResponse("TariffTraffic edited ", true);
-//        }catch (Exception e){
-//            return new ApiResponse("did not edited TariffTraffic", false);
-//        }
-//
-//    }
-
-
+    public ApiResponse getAll() {
+        List<TariffTraffic> list = tariffTrafficRepository.findAll();
+        return new ApiResponse("natija",true,list);
+    }
 }
 

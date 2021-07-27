@@ -2,9 +2,7 @@ package uz.developer.communication_system.payload;
 
 
 import lombok.Data;
-import uz.developer.communication_system.entity.Company;
 
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -14,9 +12,6 @@ public class TariffDto {
     private String name;
 
     private boolean legal ; // yuridik => true , jismoniy => false ,default jismoniy
-
-    @NotNull
-    private Integer companyId;
 
     @NotNull
     private double transitionPrice;

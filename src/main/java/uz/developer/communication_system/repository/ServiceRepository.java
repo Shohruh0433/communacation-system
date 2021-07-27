@@ -10,9 +10,6 @@ public interface ServiceRepository extends JpaRepository <Service,Integer> {
 
     boolean existsByName(String name);
 
-
-    Page<Service> findAllByCompanyId(Integer company_id, Pageable pageable);
-
     Page<Service> findAllByServiceCategoryId(Integer serviceCategory_id, Pageable pageable);
 
 

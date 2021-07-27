@@ -12,7 +12,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -45,7 +44,7 @@ public class Employee implements UserDetails {
     private User user;
     
     @ManyToOne
-    private Company company;
+    private Branch branch;
 
     @Column(unique = true)
     @Email

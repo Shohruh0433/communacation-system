@@ -28,11 +28,5 @@ public class SimCardDto {
 
     private String pinCode;
 
-//    private String password;
-
-//    public String getUsername() {
-//        return code+number;
-//    }
-
 
 }
