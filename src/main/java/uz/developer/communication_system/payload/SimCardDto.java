@@ -19,13 +19,9 @@ public class SimCardDto {
     @NotNull(message = "number null")
     @Size(max = 7,min = 7,message = "number 7 xonali bo'lsihi kerak")
     private String number;
-
     private  Long userId;
-
     private List<Integer> roles;
-
     private String simCardNumber;
-
     private String pinCode;
 
 

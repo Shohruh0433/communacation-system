@@ -9,5 +9,4 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 
-    boolean existsByEmail(@Email String email);
 }

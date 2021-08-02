@@ -23,19 +23,16 @@ public class PacketService {
     @Autowired
     private BranchRepository companyRepository;
 
-
     public List<Packet> getPackets(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
         Page<Packet> packets = packetRepository.findAll(pageable);
         return packets.getContent();
     }
-
     public Packet getPacket(Integer id){
         Optional<Packet> optionalPacket
                 = packetRepository.findById(id);
         return optionalPacket.orElse(null);
     }
-
     public ApiResponse savePacket(PacketDto packetDto){
 
         boolean exists = packetRepository.existsByPacketCode(packetDto.getPacketCode());
@@ -53,7 +50,6 @@ public class PacketService {
         packetRepository.save(packet);
         return new ApiResponse("saved packet", true);
     }
-
     public  ApiResponse editPacket(Integer id, PacketDto packetDto){
 
         Optional<Packet> optionalPacket
@@ -76,7 +72,6 @@ public class PacketService {
         return new ApiResponse("edit packet",true);
 
     }
-
     public ApiResponse deletePacket(Integer id){
         try {
             packetRepository.deleteById(id);

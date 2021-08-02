@@ -7,12 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CodesCompanyRepository extends JpaRepository <CodesCompany,Integer>{
-        boolean existsByCode(String code);
-
-        Optional<CodesCompany> findByCode(String code);
-
-
-
-
-        List<CodesCompany> findAllByCompanyId(Integer company_id);
+        boolean existsByCompanyCode(String code);
+        Optional<CodesCompany> findByCompanyCode(String code);
 }

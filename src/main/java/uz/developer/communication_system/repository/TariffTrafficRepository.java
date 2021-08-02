@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface TariffTrafficRepository extends JpaRepository<TariffTraffic,Long> {
 
-    Optional<TariffTraffic> findByCompanyCodeAndNumber(String companyCode, String number);
+    Optional<TariffTraffic> findBySimCard_CompanyCodeAndSimCard_Number(String companyCode, String number);
 
 
     Optional<TariffTraffic> findBySimCardNumber(String simCardNumber);

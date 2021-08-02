@@ -87,20 +87,10 @@ public class BranchService {
 
     }
 
-
     public ApiResponse getByDistrict(Integer districtId, int page, int size) {
 
         Pageable pageable = PageRequest.of(page,size);
         Page<Branch> pages = branchRepository.findAllByDistrict_Id(districtId,pageable);
-
-        return new ApiResponse("success ",true,pages);
-
-    }
-
-    public ApiResponse getByParentCompany(Integer branchId, int page, int size) {
-
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Branch> pages = branchRepository.findAllByCompanyId(branchId,pageable);
 
         return new ApiResponse("success ",true,pages);
 

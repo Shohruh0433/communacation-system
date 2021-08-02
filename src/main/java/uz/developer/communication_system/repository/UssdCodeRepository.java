@@ -8,7 +8,5 @@ import uz.developer.communication_system.entity.UssdCode;
 
 public interface UssdCodeRepository extends JpaRepository<UssdCode,Integer> {
 
-    boolean existsByCodeAndCompany_Id(String code, Integer company_id);
-
-    Page<UssdCode> findAllByCompanyId(Integer company_id, Pageable pageable);
+    boolean existsByCode(String code);
 }

@@ -24,14 +24,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-//    @PostMapping("/registerSimCard")
-//    public ResponseEntity<?> registerSimCard(@Valid @RequestBody SimCardDto simCardDto){
-//
-//        ApiResponse register = authService.registerSimCard(simCardDto);
-//        return ResponseEntity.status(register.isSuccess()?201:409).body(register);
-//    }
-
-
     @PostMapping("/loginSimCard")
     public ResponseEntity<?> loginSimCard(@Valid @RequestBody SimCardDto simCardDto){
         return ResponseEntity.ok(authService.loginSimCard(simCardDto));

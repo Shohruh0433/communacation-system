@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import uz.developer.communication_system.entity.Branch;
 import uz.developer.communication_system.entity.UssdCode;
 import uz.developer.communication_system.payload.ApiResponse;
-import uz.developer.communication_system.payload.UssdCodeDto;
 import uz.developer.communication_system.repository.BranchRepository;
 import uz.developer.communication_system.repository.UssdCodeRepository;
 
@@ -20,21 +19,13 @@ public class UssdCodeService {
     @Autowired
     UssdCodeRepository ussdCodeRepository;
     @Autowired
-    BranchRepository companyRepository;
+    BranchRepository branchRepository;
 
 
-    public ApiResponse add(UssdCodeDto ussdCodeDto) {
+    public ApiResponse add(UssdCode ussdCode) {
         try {
-            if (ussdCodeRepository.existsByCodeAndCompany_Id(ussdCodeDto.getCode(),ussdCodeDto.getCompanyId()))
-                return new ApiResponse("Already exist Code and Company", false);
-
-            Optional<Branch> optionalCompany = companyRepository.findById(ussdCodeDto.getCompanyId());
-            if (optionalCompany.isEmpty())
-                return new ApiResponse("Not found Company", false);
-
-            UssdCode ussdCode = new UssdCode();
-            ussdCode.setCode(ussdCodeDto.getCode());
-            ussdCode.setDescription(ussdCode.getDescription());
+            if (ussdCodeRepository.existsByCode(ussdCode.getCode()))
+                return new ApiResponse("Already exist Code", false);
 
             ussdCodeRepository.save(ussdCode);
             return new ApiResponse("UssdCode added ", true);
@@ -59,23 +50,15 @@ public class UssdCodeService {
                 -> new ApiResponse("not found UssdCode", false));
     }
 
-    public ApiResponse edit(UssdCodeDto ussdCodeDto, Integer id) {
+    public ApiResponse edit(UssdCode ussdCode, Integer id) {
 
         try {
             Optional<UssdCode> optionalUssdCode = ussdCodeRepository.findById(id);
             if (optionalUssdCode.isEmpty())
                 return new ApiResponse("Not found Ussd Code", false);
 
-            if (ussdCodeRepository.existsByCodeAndCompany_Id(ussdCodeDto.getCode(),ussdCodeDto.getCompanyId()))
+            if (ussdCodeRepository.existsByCode(ussdCode.getCode()))
                 return new ApiResponse("Already exist Code and Company", false);
-
-            Optional<Branch> optionalCompany = companyRepository.findById(ussdCodeDto.getCompanyId());
-            if (optionalCompany.isEmpty())
-                return new ApiResponse("Not found Company", false);
-
-            UssdCode ussdCode = optionalUssdCode.get();
-            ussdCode.setCode(ussdCodeDto.getCode());
-            ussdCode.setDescription(ussdCode.getDescription());
 
             ussdCodeRepository.save(ussdCode);
             return new ApiResponse("UssdCode edited ", true);
@@ -84,12 +67,4 @@ public class UssdCodeService {
         }
     }
 
-    public ApiResponse getByCompany(int page, int size, Integer companyId) {
-
-        Pageable pageable = PageRequest.of(page,size);
-        Page<UssdCode> pages = ussdCodeRepository.findAllByCompanyId(companyId,pageable);
-
-        return new ApiResponse("success ",true,pages);
-
-    }
 }

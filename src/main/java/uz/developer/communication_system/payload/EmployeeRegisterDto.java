@@ -26,10 +26,4 @@ public class EmployeeRegisterDto {
     @NotNull
     private Set<Integer> roles;
 
-    @NotNull
-    @Email
-    private  String email;
-
-
-
 }

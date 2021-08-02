@@ -31,7 +31,7 @@ public class TariffTrafficService {
 
     public ApiResponse getByCodeAndNumber(String companyCode,String number) {
 
-        Optional<TariffTraffic> optionalTariffTraffic = tariffTrafficRepository.findByCompanyCodeAndNumber(companyCode,number);
+        Optional<TariffTraffic> optionalTariffTraffic = tariffTrafficRepository.findBySimCard_CompanyCodeAndSimCard_Number(companyCode,number);
         return optionalTariffTraffic.map(
                 tariffTraffic -> new ApiResponse("success ", true, tariffTraffic)).orElseGet(()
                 -> new ApiResponse("not found", false));

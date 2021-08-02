@@ -19,4 +19,6 @@ public class UssdCode {
 
     private String description;
 
+    private boolean active;
+
 }

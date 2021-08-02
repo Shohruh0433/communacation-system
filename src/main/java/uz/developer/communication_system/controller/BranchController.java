@@ -74,14 +74,5 @@ public class BranchController {
     }
 
 
-    @GetMapping("/get/{companyId}")
-    public HttpEntity<?> getByParentCompany( @PathVariable Integer companyId ,
-                                        @RequestParam(defaultValue = "0") int page,
-                                        @RequestParam(defaultValue = "10") int size){
-
-        ApiResponse apiResponse = companyService.getByParentCompany(companyId,page,size);
-
-        return ResponseEntity.status(apiResponse.isSuccess()? 200:409).body(apiResponse);
-    }
 
 }

@@ -27,20 +27,14 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-
-
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest,
                                     HttpServletResponse httpServletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
-
         String authorization = httpServletRequest.getHeader("Authorization");
-
         if (authorization!=null && authorization.startsWith("Bearer")){
-
             String header = httpServletRequest.getHeader("Client");
             boolean client =  header!=null && header.equals("Client");
-
             authorization=authorization.substring(7);
             String username=jwtProvider.getUsernameFromToken(authorization);
             if (username!=null){
@@ -56,26 +50,17 @@ public class JwtFilter extends OncePerRequestFilter {
             byte[] bytes = Base64
                     .getDecoder()
                     .decode(basic);
-
             String string = new String(bytes, StandardCharsets.UTF_8);
             String [] split = string.split(":");
             String userName = split[0];
             String pinCode = split[1];
-
             UserDetails userDetails = authService.loadClientByUsernameFromSimCard(userName);
             if (passwordEncoder.matches(pinCode,userDetails.getPassword())){
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                         = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
-
-
         }
-
-
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }
-
-
-
 }

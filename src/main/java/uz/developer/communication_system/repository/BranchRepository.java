@@ -9,8 +9,5 @@ public interface BranchRepository extends JpaRepository<Branch,Integer> {
 
 
     Page<Branch> findAllByDistrict_Id(Integer district_id, Pageable pageable);
-
-    Page<Branch> findAllByCompanyId(Integer company_id, Pageable pageable);
-
     Page<Branch> findAllByDistrict_Region_Id(Integer district_region_id, Pageable pageable);
 }

@@ -20,12 +20,9 @@ public class TariffTraffic {
     @Id
     @GeneratedValue 
     private Long id;
-    @Column(nullable = false)
-    private String  number;
-    @Column(nullable = false)
-    private String  companyCode;
-    @Column(unique = true,nullable = false)
-    private String simCardNumber;
+
+    @OneToOne
+    private SimCard simCard;
     private double netLimitAll;
     private double netLimitTelegram;
     private double netLimitYoutube;
