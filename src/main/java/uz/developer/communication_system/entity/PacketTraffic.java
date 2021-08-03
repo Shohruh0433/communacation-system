@@ -25,5 +25,5 @@ public class PacketTraffic {
     private  SimCard simCard;
     @ManyToOne
     private Packet packet;
-
+    private boolean active = true;
 }

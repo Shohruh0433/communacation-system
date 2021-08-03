@@ -12,11 +12,11 @@ import java.util.Optional;
 
 public interface  PacketTrafficRepository extends JpaRepository<PacketTraffic,Integer> {
 
-
     Optional<PacketTraffic> findBySimCard_CompanyCodeAndSimCard_Number(String companyCode, String number);
 
     Optional<PacketTraffic> findByPacketTypeAndSimCard(PacketType packetType, SimCard simCard);
 
     Page<PacketTraffic> findAllByPacketType(PacketType packetType, Pageable pageable);
 
+    List<PacketTraffic> findAllByPacketIdAndActiveIsTrue(Integer packet_id);
 }

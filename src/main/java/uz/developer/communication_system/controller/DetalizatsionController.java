@@ -14,14 +14,4 @@ public class DetalizatsionController {
         this.detalizationService = detalizationService;
     }
 
-   @GetMapping
-    public HttpEntity<?> getAll (){
-
-        return  null;
-   }
-
-
-
-
-
 }

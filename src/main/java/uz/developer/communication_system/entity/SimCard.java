@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 @Data
@@ -26,11 +27,12 @@ public class SimCard implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
-    private boolean block = false;
+    private boolean block;
     private String companyCode;
     private String number;
     private double balance;
-    private boolean active = false;
+    private boolean active;
+    private boolean owner;
     @Column(nullable = false)
     private String password;
     private String pinCode;
@@ -42,8 +44,8 @@ public class SimCard implements UserDetails {
     private Tariff tariff;
     @ManyToOne
     private PacketTraffic paketTraffic;
-    @ManyToMany
-    private Set<Role> roles;
+    @ManyToOne
+    private Role role;
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
@@ -53,51 +55,41 @@ public class SimCard implements UserDetails {
     private Long createdBy;
     @LastModifiedBy
     private Long updatedBy;
-
+    @ManyToOne
+    private Branch branch;
 
     private boolean accountNonExpired = true;
-
     private boolean accountNonLocked = true;
-
     private boolean credentialsNonExpired = true;
-
     private boolean enabled = true;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return Collections.singleton(role);
     }
-
     @Override
     public String getPassword() {
         return pinCode;
     }
-
     @Override
     public String getUsername() {
         return companyCode+number;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
-
     @Override
     public boolean isEnabled() {
         return enabled;
     }
-
 
 }

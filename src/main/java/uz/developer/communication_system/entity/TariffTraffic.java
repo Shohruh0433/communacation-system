@@ -30,5 +30,8 @@ public class TariffTraffic {
     private long minuteOutNet;
     private long minuteInNet;
     private Date trafficExpireDate;
+    private boolean active = true;
+    @ManyToOne
+    private Tariff tariff;
 
 }

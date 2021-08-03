@@ -34,7 +34,7 @@ public class Packet {
 
     @Column(nullable = false)
     private int expireDay;
-
+     private boolean active = true;
     public Long getExpireDayMillis() {
         return expireDay * 1000L * 60 * 60 * 24;
     }

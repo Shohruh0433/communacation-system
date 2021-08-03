@@ -3,6 +3,7 @@ package uz.developer.communication_system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import uz.developer.communication_system.payload.ApiResponse;
@@ -34,7 +35,7 @@ public class AuthController {
     public ResponseEntity<?> loginEmployee(@Valid @RequestBody EmployeeLoginDto employeeDto){
         return ResponseEntity.ok(authService.loginEmployee(employeeDto));
     }
-
+      @PreAuthorize(value = "hasAnyRole('ROLL_FILIAL_LEADER','ROLL_MANAGER','ROLL_DIRECTOR','ROLL_EMPLOYEES_MANAGER')")
         @PostMapping("/registerEmployee")
     public ResponseEntity<?> registerEmployee(@Valid @RequestBody EmployeeRegisterDto employeeRegisterDto){
 

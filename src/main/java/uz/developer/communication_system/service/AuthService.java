@@ -3,6 +3,7 @@ package uz.developer.communication_system.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +29,7 @@ import uz.developer.communication_system.repository.SimCardRepository;
 import uz.developer.communication_system.repository.UserRepository;
 import uz.developer.communication_system.security.JwtProvider;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -59,7 +61,7 @@ public class AuthService implements UserDetailsService {
                     simCardDto.getPinCode()
             ));
             SimCard simCard=(SimCard) authenticate.getPrincipal();
-            String token = jwtProvider.generateToken(simCard.getUsername(), simCard.getRoles());
+            String token = jwtProvider.generateToken(simCard.getUsername(), Collections.singleton(simCard.getRole()));
             return new ApiResponse(token,true);
 
         }catch (BadCredentialsException e){
@@ -79,6 +81,8 @@ public class AuthService implements UserDetailsService {
             return new ApiResponse("parol yoki login xato",false);
         }
     }
+
+
     public ApiResponse registerEmployee(EmployeeRegisterDto employeeRegisterDto) {
         ApiResponse apiResponse = simCardService.getPassportBySeriesAndNumber(
                 employeeRegisterDto.getPassportSeries(), employeeRegisterDto.getPassportNumber());
